@@ -1,14 +1,196 @@
-* {
-  margin: 0;
-  padding-top: 38px;
-  box-sizing: 20;
+
+.main-container {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  padding: 20px;
+  font-family: 'Roboto', sans-serif;
+  flex-wrap: wrap; /* Asegura que los elementos se ajusten en pantallas pequeñas */
 }
 
-/* Contenedor principal */
+/* Barra de filtros superior */
+.filters {
+  margin-top: 70px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #f3f3f3;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin-bottom: 20px;
+  flex-wrap: nowrap; /* Permite que los filtros se ajusten */
+}
+
+/* Filtros de categorías (botones) */
+.filter-category {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap; /* Permite que los botones se ajusten en pantallas pequeñas */
+  justify-content: center; /* Centra los botones */
+  width: 100%;
+}
+
+.filter-category button {
+  padding: 10px 20px;
+  background-color: #ea6834;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+  margin: 5px 0; /* Agrega margen para separarlos mejor en pantallas pequeñas */
+}
+
+.filter-category button:hover {
+  background-color: #dcbb7e;
+}
+
+.filter-category button.active {
+  background-color: #dcbb7e;
+}
+
+/* Filtro de precio */
+.filter-price {
+  display: flex;
+  flex-wrap: wrap; /* Acomoda los elementos de manera flexible */
+  gap: 10px;
+  justify-content: center; /* Centra los elementos */
+  align-items: center;
+  width: 100%;
+}
+
+.filter-price input[type="number"] {
+  width: 80px;
+  padding: 8px;
+  background: #73302e;
+  border: 1px solid #dcbb7e;
+  border-radius: 5px;
+  color: #fff;
+  font-size: 16px;
+  text-align: center;
+}
+
+.filter-price input[type="number"]:focus {
+  border-color: #ea6834;
+}
+
+
+
+@media (max-width: 480px) {
+  .filter-price input[type="number"] {
+    width: 50px; /* Ajuste adicional en pantallas muy pequeñas */
+  }
+
+  .filter-category button {
+    padding: 8px 15px; /* Reduce el tamaño de los botones */
+    font-size: 14px; /* Tamaño de fuente más pequeño */
+  }
+}
+
+
+/* Contenedor de productos */
 .product-container {
-  display: flex; /* Usa flexbox para organizar las tarjetas */
-  flex-wrap: wrap; /* Permite que las tarjetas pasen a nuevas filas si no caben en la fila actual */
-  gap: 16px; /* Espacio uniforme entre tarjetas */
-  justify-content: center; /* Alinea las tarjetas de manera uniforme en el centro */
-  padding: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center; /* Asegura que los productos estén centrados */
+  align-items: center; /* Centra verticalmente las tarjetas */
+  width: 100%;
+}
+
+.product-card {
+  background-color: #fff;
+  width: calc(33.33% - 20px);
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  margin-bottom: 20px; /* Asegura separación entre tarjetas */
+}
+
+.product-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.product-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+
+.product-card h3 {
+  padding: 10px;
+  font-size: 18px;
+  font-weight: bold;
+  color: #73302e; /* Color marrón para el texto */
+  text-align: center;
+}
+
+.product-card .price {
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  color: #ea6834; /* Color naranja brillante para el precio */
+  padding: 10px;
+}
+
+/* Descripción o texto adicional */
+.product-card p {
+  margin: 4px 0;
+  font-size: 1em;
+  font-family: 'Playfair Display', serif;
+  color: #73302e;
+  text-align: center;
+  flex-grow: 1; /* Hace que el texto se ajuste dentro del contenedor */
+  overflow-wrap: break-word; /* Permite que el texto se ajuste si es demasiado largo */
+  word-wrap: break-word;
+  hyphens: auto;
+}
+
+
+/* Responsividad para pantallas pequeñas */
+@media (max-width: 768px) {
+  .main-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .filters {
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    padding: 15px;
+  }
+
+  .product-card {
+    width: 100%; /* Las tarjetas de productos ocupan el 100% del ancho en pantallas más pequeñas */
+    margin-bottom: 20px;
+  }
+
+  .filter-category {
+    gap: 5px;
+  }
+
+  .filter-price input[type="number"] {
+    width: 60px;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-card {
+    width: 100%; /* 1 producto por fila en pantallas muy pequeñas */
+    margin-bottom: 20px;
+  }
+
+  .filter-category {
+    gap: 10px;
+  }
+
+  .filter-price input[type="number"] {
+    width: 60px;
+  }
 }

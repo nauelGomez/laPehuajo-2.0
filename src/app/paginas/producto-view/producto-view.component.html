@@ -1,40 +1,53 @@
 <div class="info-producto">
+    <!-- Breadcrumb -->
     <nav class="breadcrumb">
-      <a href="#">Inicio</a> > 
-      <a href="#">{{ product?.category?.name || 'Sin categoría' }}</a> >
-      <span>{{ product?.title || 'Título no disponible' }}</span>
+      <a routerLink="/">Inicio</a> >
+      <a >{{ product.category?.name }}</a> >
+      <span>{{ product.title }}</span>
     </nav>
   
     <div class="product-details">
+      <!-- Sección de imágenes -->
       <div class="product-images">
-        <img
-          class="main-image"
-          [src]="product.images[0] || 'placeholder.jpg'"
-          alt="{{ product?.title || 'Producto sin imagen' }}"
-        />
+        <div class="carousel">
+          <img
+            class="main-image"
+            [src]="mainImage"
+            [alt]="product.title"
+            [class.fade]="isAnimating"
+            (animationend)="onAnimationEnd()"
+          />
+        </div>
         <div class="thumbnail-container">
           <img
-            *ngFor="let image of product?.images"
+            *ngFor="let image of product.images; let i = index"
             class="thumbnail"
             [src]="image"
-            alt="Vista del producto"
+            [alt]="'Imagen ' + (i + 1) + ' de ' + product.title"
+            (click)="onThumbnailClick(i)"
           />
         </div>
       </div>
   
+      <!-- Información del producto -->
       <div class="product-info">
-        <h1>{{ product?.title || 'Título no disponible' }}</h1>
-        <p class="price">$ {{ product?.price || 'No disponible' }}</p>
+        <h1>{{ product.title }}</h1>
+        <p class="price">$ {{ product.price | number: '1.0-2' }}</p>
         <p class="discount">20% OFF COMPRANDO 6 O MÁS!</p>
         <div class="quantity-selector">
-          <button>-</button>
-          <input type="number" min="1" value="1" />
-          <button>+</button>
+          <button (click)="decrementQuantity()">-</button>
+          <input
+            type="number"
+            [(ngModel)]="quantity"
+            min="1"
+            [value]="quantity"
+          />
+          <button (click)="incrementQuantity()">+</button>
         </div>
-        <button class="add-to-cart">AGREGAR AL CARRITO</button>
+        <button class="add-to-cart" (click)="addToCart()">AGREGAR AL CARRITO</button>
         <div class="description">
           <h3>Descripción</h3>
-          <p>{{ product?.description || 'Sin descripción' }}</p>
+          <p>{{ product.description }}</p>
         </div>
       </div>
     </div>

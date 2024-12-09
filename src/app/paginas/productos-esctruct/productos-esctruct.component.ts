@@ -19,13 +19,41 @@ import { Router, RouterLink } from '@angular/router';
 export class ProductosEsctructComponent {
 
   products: RootObject[] = [];
+  filteredProducts: RootObject[] = [];
+  
+  priceRange: { min: number, max: number } = { min: 0, max: 10000 };
+  selectedCategory: string = '';
+
+  categories: string[] = ['Mieles', 'Pastas', 'Frutos Secos'];
 
   constructor(private service: ProductService) {}
 
-  ngOnInit(): void{
+  ngOnInit(): void {
     this.service.getProductsList().subscribe((data) => {
       this.products = data;
+      this.filteredProducts = data;
     });
+  }
+
+  // Filtrar por precio y categoría
+  applyFilters(): void {
+    this.filteredProducts = this.products.filter((product) => {
+      const priceMatch = product.price >= this.priceRange.min && product.price <= this.priceRange.max;
+      const categoryMatch = this.selectedCategory ? product.category.name === this.selectedCategory : true;
+      return priceMatch && categoryMatch;
+    });
+  }
+
+  // Resetear filtros
+  resetFilters(): void {
+    this.priceRange = { min: 0, max: 10000 };
+    this.selectedCategory = '';
+    this.filteredProducts = [...this.products];
+  }
+
+  selectCategory(category: string): void {
+    this.selectedCategory = category;
+    this.applyFilters();
   }
   
 }

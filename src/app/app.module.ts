@@ -13,7 +13,8 @@ import { HttpClient } from '@angular/common/http';
 		AppComponent,
 		FormsModule,
 		BrowserAnimationsModule,
-		CommonModule],
+		CommonModule,
+	FormsModule],
 	providers: []
 })
 export class AppModule {
