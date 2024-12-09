@@ -19,7 +19,7 @@ export class ProductService {
     return this.http.get<RootObject>(`https://api.escuelajs.co/api/v1/products/${id}`);
   }
   
-
+  
   private cartItemsSubject = new BehaviorSubject<Product[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
 

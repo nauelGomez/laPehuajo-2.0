@@ -4,6 +4,7 @@ import { ProductService } from '../../services/servicio productos/product.servic
 import { RootObject } from '../../services/servicio productos/product.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { CarritoService } from '../../services/servicio carrito/carrito.service';
 
 @Component({
   selector: 'app-producto-view',
@@ -24,7 +25,8 @@ export class ProductoViewComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    private carritoService: CarritoService
   ) {}
 
   ngOnInit(): void {
@@ -66,6 +68,7 @@ export class ProductoViewComponent implements OnInit {
 
   // Acción de agregar al carrito
   addToCart(): void {
+    this.carritoService.addToCart(this.product, this.quantity);
     console.log(`Producto agregado al carrito: ${this.product.title}, cantidad: ${this.quantity}`);
   }
 
@@ -76,4 +79,7 @@ export class ProductoViewComponent implements OnInit {
   onAnimationEnd(): void {
     this.isAnimating = false; // Detenemos la animación al finalizar
   }
+
+  
+  
 }

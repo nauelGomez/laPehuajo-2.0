@@ -5,24 +5,27 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Product } from '../../services/servicio productos/product.interface';
+import { Product, RootObject } from '../../services/servicio productos/product.interface';
 import { CarouselProductsComponent } from '../../paginas/carousel-products/carousel-products.component';
 import { RouterLink } from '@angular/router';
+import { CarritoService } from '../../services/servicio carrito/carrito.service';
+import { CarroComponent } from "../carro/carro.component";
 
 @Component({
   selector: 'app-app-capsule',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, CarouselProductsComponent, RouterLink],
+  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, CarouselProductsComponent, RouterLink, CarroComponent],
   templateUrl: './app-capsule.component.html',
   styleUrl: './app-capsule.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 
 })
 export class AppCapsuleComponent implements OnInit {
-  acc: ((previousValue: Product, currentValue: Product, currentIndex: number, array: Product[]) => Product) | undefined;
-  constructor(private renderer: Renderer2) { }
-  cartItems: Array<Product & { quantity: number }> = [];
+  acc: ((previousValue: RootObject, currentValue: RootObject, currentIndex: number, array: RootObject[]) => RootObject) | undefined;
+  constructor(private renderer: Renderer2, private carritoService: CarritoService) { }
+  cartItems: (RootObject & { quantity: number })[] = [];
   isCartOpen: boolean = false;
+  isLoading: boolean = true; // Estado de carga
   cartCount: number = 0;
   cartTotal: number = 0;
   postalCode: string = '';
@@ -39,91 +42,40 @@ export class AppCapsuleComponent implements OnInit {
     }
   }
   ngOnInit(): void {
-    // Inicialización de productos disponibles
-    this.cartItems = [
-      {
-        id: 1,
-        name: 'Producto 1',
-        description: 'Descripción del producto 1',
-        price: 100,
-        imageUrl: 'https://acdn.mitiendanube.com/stores/002/133/760/products/69b38041-330b-4bc3-8527-2ebdd9d3c2d1-9a61b507b31db1191a16600528361378-640-0.jpeg',
-        category: 'Categoría 1',
-        isAvailable: 'Sí',
-        quantity: 1,
-      },
-      {
-        id: 2,
-        name: 'Producto 2',
-        description: 'Descripción del producto 2',
-        price: 200,
-        imageUrl: 'https://acdn.mitiendanube.com/stores/002/133/760/products/69b38041-330b-4bc3-8527-2ebdd9d3c2d1-9a61b507b31db1191a16600528361378-640-0.jpeg',
-        category: 'Categoría 2',
-        isAvailable: 'Sí',
-        quantity: 1,
-      },
-    ];
-  }
-
-  addToCart(product: Product): void {
-    console.log('Producto recibido en AppCapsule:', product); // Debug para verificar recepción
-
-    const existingProduct = this.cartItems.find((item) => item.id === product.id);
-
-    if (existingProduct) {
-      // Incrementa la cantidad si el producto ya existe
-      existingProduct.quantity++;
-    } else {
-      // Agrega el nuevo producto al carrito
-      this.cartItems.push({ ...product, quantity: 1 });
-    }
-
-    // Actualiza el contador del carrito
-    this.cartCount = this.cartItems.reduce((count, item) => count + item.quantity, 0);
-  }
-
-
-
-  decreaseQuantity(product: any): void {
-    if (product.quantity > 1) {
-      product.quantity--;
+    this.carritoService.cartItems$.subscribe((items) => {
+      this.cartItems = items;
+      this.isLoading = false; // Cambia el estado cuando los datos están listos
       this.calculateTotal();
-    } else {
-      // Añadimos una clase temporal para la animación
-      const productIndex = this.cartItems.indexOf(product);
-      if (productIndex > -1) {
-        const cartTableRows = document.querySelectorAll('.cart-table tbody tr');
-        const rowToAnimate = cartTableRows[productIndex] as HTMLElement;
-        if (rowToAnimate) {
-          rowToAnimate.classList.add('fade-out');
-          // Esperamos a que termine la animación para eliminar el producto
-          setTimeout(() => {
-            this.cartItems.splice(productIndex, 1);
-            this.calculateTotal();
-          }, 300); // Duración de la animación
-        }
-      }
-    }
-  }
-
-
-
-  increaseQuantity(product: any): void {
-    product.quantity++;
-    this.calculateTotal();
+    });
+    this.carritoService.getCartItems(); // Inicia la carga de datos
   }
 
   checkout(): void {
-
     console.log('Compra finalizada:', this.cartItems);
   }
   calculateTotal(): number {
     const total = this.cartItems.reduce((total, item) => total + item.price * item.quantity, 0);
-    this.cartCount = this.cartItems.reduce((count, item) => count + item.quantity, 0); // Actualiza el contador de productos
+    this.cartCount = this.cartItems.reduce((count, item) => count + item.quantity, 0); 
     return total;
   }
   toggleCart(): void {
     this.isCartOpen = !this.isCartOpen;
   }
+
+  updateQuantity(event: { productId: number; quantity: number }): void {
+    const product = this.cartItems.find(item => item.id === event.productId);
+    if (product) {
+      product.quantity = event.quantity;
+      this.calculateTotal(); // Recalcular total
+    }
+  }
+  
+  removeFromCart(productId: number): void {
+    this.cartItems = this.cartItems.filter(item => item.id !== productId);
+    this.calculateTotal(); // Recalcular total
+  }
+
+  
   @HostListener('window:scroll', [])
   onScroll(): void {
     const scrollPosition = window.pageYOffset;
