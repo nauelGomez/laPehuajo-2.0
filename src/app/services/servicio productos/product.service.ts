@@ -7,13 +7,19 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductService {
-
+  private apiUrl = 'https://api.escuelajs.co/api/v1/products';
   constructor (private http: HttpClient) {}
 
-  getProductsList(): Observable<RootObject[]>
-  {
-   return this.http.get<RootObject[]>(`https://api.escuelajs.co/api/v1/products?offset=0&limit=10`);
+  getProductsList(): Observable<RootObject[]> {
+    return this.http.get<RootObject[]>(`${this.apiUrl}?offset=3&limit=20`);
   }
+
+  getProductById(id: number): Observable<RootObject> {
+    console.log('Solicitando producto con ID:', id);
+    return this.http.get<RootObject>(`https://api.escuelajs.co/api/v1/products/${id}`);
+  }
+  
+
   private cartItemsSubject = new BehaviorSubject<Product[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
 

@@ -1,0 +1,42 @@
+<div class="info-producto">
+    <nav class="breadcrumb">
+      <a href="#">Inicio</a> > 
+      <a href="#">{{ product?.category?.name || 'Sin categoría' }}</a> >
+      <span>{{ product?.title || 'Título no disponible' }}</span>
+    </nav>
+  
+    <div class="product-details">
+      <div class="product-images">
+        <img
+          class="main-image"
+          [src]="product.images[0] || 'placeholder.jpg'"
+          alt="{{ product?.title || 'Producto sin imagen' }}"
+        />
+        <div class="thumbnail-container">
+          <img
+            *ngFor="let image of product?.images"
+            class="thumbnail"
+            [src]="image"
+            alt="Vista del producto"
+          />
+        </div>
+      </div>
+  
+      <div class="product-info">
+        <h1>{{ product?.title || 'Título no disponible' }}</h1>
+        <p class="price">$ {{ product?.price || 'No disponible' }}</p>
+        <p class="discount">20% OFF COMPRANDO 6 O MÁS!</p>
+        <div class="quantity-selector">
+          <button>-</button>
+          <input type="number" min="1" value="1" />
+          <button>+</button>
+        </div>
+        <button class="add-to-cart">AGREGAR AL CARRITO</button>
+        <div class="description">
+          <h3>Descripción</h3>
+          <p>{{ product?.description || 'Sin descripción' }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  

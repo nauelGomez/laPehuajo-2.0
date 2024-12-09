@@ -1,22 +1,31 @@
-/* Contenedor principal */
 .product-container {
-    display: flex;
-    flex-wrap: wrap; /* Permite múltiples filas */
-    gap: 16px; /* Espacio entre las tarjetas */
-    justify-content: space-between; /* Espaciado uniforme */
-    padding: 16px;
-  }
-  
-  /* Tarjetas individuales */
-  .product-card {
-    flex: 1 1 calc(33.33% - 16px); /* Tres tarjetas por fila */
-    background-color: #fff; /* Fondo blanco */
-    border: 1px solid #ddd; /* Borde gris claro */
-    border-radius: 8px; /* Esquinas redondeadas */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-    padding: 16px;
-    text-align: center; /* Centrar contenido */
-  }
+  display: flex;
+  flex: 1 1 280px;
+  flex-wrap: wrap; 
+  gap: 16px; 
+  font-size: 12px;
+  justify-content: space-between; 
+  padding: 16px;
+  font-family: 'Playfair Display', serif; 
+}
+
+/* Tarjetas individuales */
+.product-card {
+  flex: 1 1 300px; /* Fija un tamaño base cómodo para las tarjetas */
+  background-color: #fff; /* Fondo blanco */
+  border: 1px solid #ddd; /* Borde gris claro */
+  border-radius: 8px; /* Esquinas redondeadas */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  padding: 16px;
+  text-align: flex; /* Centrar contenido */
+  text-wrap: wrap;
+  box-sizing: border-box;
+}
+
+.product-card:hover {
+  transform: scale(1.05); /* Ampliar ligeramente al pasar el mouse */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Mayor sombra */
+}
   
   /* Contenedor de imágenes */
   .image-container {
@@ -39,14 +48,16 @@
   /* Precio */
   .price {
     font-weight: bold;
-    font-size: 1.2em;
+    font-size: 1.2em !important;
+    font-family: 'Playfair Display', serif !important;
     color: #333; /* Texto en color gris oscuro */
   }
   
   /* Descuento */
   .product-card p {
     margin: 4px 0;
-    font-size: 0.9em;
-    color: #f56a00; /* Color naranja para destacar */
+    font-size: 1.0em;
+    font-family: 'Playfair Display', serif;
+    color: #73302e; /* Color naranja para destacar */
   }
   
