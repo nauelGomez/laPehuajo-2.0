@@ -1,0 +1,52 @@
+/* Contenedor principal */
+.product-container {
+    display: flex;
+    flex-wrap: wrap; /* Permite múltiples filas */
+    gap: 16px; /* Espacio entre las tarjetas */
+    justify-content: space-between; /* Espaciado uniforme */
+    padding: 16px;
+  }
+  
+  /* Tarjetas individuales */
+  .product-card {
+    flex: 1 1 calc(33.33% - 16px); /* Tres tarjetas por fila */
+    background-color: #fff; /* Fondo blanco */
+    border: 1px solid #ddd; /* Borde gris claro */
+    border-radius: 8px; /* Esquinas redondeadas */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+    padding: 16px;
+    text-align: center; /* Centrar contenido */
+  }
+  
+  /* Contenedor de imágenes */
+  .image-container {
+    width: 100%;
+    height: 200px; /* Altura fija para las imágenes */
+    overflow: hidden; /* Ocultar partes excedentes */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+  }
+  
+  /* Imágenes */
+  .image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Ajustar imagen sin recortarla */
+  }
+  
+  /* Precio */
+  .price {
+    font-weight: bold;
+    font-size: 1.2em;
+    color: #333; /* Texto en color gris oscuro */
+  }
+  
+  /* Descuento */
+  .product-card p {
+    margin: 4px 0;
+    font-size: 0.9em;
+    color: #f56a00; /* Color naranja para destacar */
+  }
+  

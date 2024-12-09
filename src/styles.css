@@ -1,0 +1,144 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; }
+/* Contenedor general del carrusel */
+
+.p-carousel-indicators {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    gap: 10px; /* Espaciado entre los puntos */
+    margin-top: 20px;
+  }
+  
+ .service-item{
+    box-shadow: none !important;
+ }
+
+.mdc-button__label{
+  color: #73302e;
+}
+
+.p-carousel-content {
+  background-color: #faf0dd;
+}
+
+  
+  button.p-carousel-next,
+  button.p-carousel-prev {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #dcbb7e;
+    color: #73302e;
+    border: none;
+    border-radius: 50%;
+    width: 35px;
+    height: 35px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    z-index: 10;
+    visibility: hidden;
+  }
+  
+  /* Flechas al pasar el ratón */
+  button.p-carousel-next:hover,
+  button.p-carousel-prev:hover {
+    background-color: #73302e;
+    color: #ffffff;
+    transform: scale(1.1);
+  }
+  
+  /* Flecha derecha */
+  button.p-carousel-next {
+    right: 10px;
+    
+  }
+  
+  /* Flecha izquierda */
+  button.p-carousel-prev {
+    left: 10px;
+    
+  }
+  
+  /* Indicadores (Puntos) */
+  .p-carousel-indicators {
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin-top: 15px;
+    gap: 8px;
+  }
+
+  li.p-carousel-indicator::marker {
+    content: none !important; /* Elimina contenido generado */
+    display: none !important; /* Oculta completamente el marcador */
+  }
+  
+  .mdc-button__label:hover{
+    color: #73302e;
+  }
+  
+  /* Ajustes generales para móviles */
+  @media (max-width: 768px) {
+    button.p-carousel-next,
+    button.p-carousel-prev {
+      display: none !important; /* Oculta completamente las flechas */
+    }
+  }
+
+  button.p-link {
+    font-family: 'Playfair Display', serif;
+    background-color: #fef9f6; 
+    color: #73302e; 
+    border: 1px solid #dcbb7e; 
+    border-radius: 25px; 
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 5px; 
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra sutil */
+    transition: all 0.3s ease; /* Transición para hover y active */
+  }
+  
+  /* Efecto hover */
+  button.p-link:hover {
+    background-color: #dcbb7e;
+    color: #fef9f6;
+    transform: scale(1.1); /* Aumenta ligeramente el tamaño */
+  }
+  
+  /* Botón seleccionado (activo) */
+  button.p-link.p-highlight {
+    background-color: #ea6834; /* Fondo del botón activo */
+    color: #ffffff; /* Texto blanco */
+    border-color: #73302e; /* Borde más oscuro */
+    transform: scale(1.2); /* Resalta el botón activo */
+    font-weight: bold; /* Opcional: hacer el texto más destacado */
+  }
+  
+  /* Tamaño responsivo en móviles */
+  @media (max-width: 768px) {
+    button.p-link {
+      width: 16px;
+      height: 16px;
+      font-size: 12px; /* Texto más pequeño */
+    }
+  
+    button.p-link.p-highlight {
+      transform: scale(1.15); /* Resalta menos en móviles */
+    }
+  }
+
+  ul.p-carousel-indicators {
+    margin: 20px 10px 10px 10px !important; /* Elimina cualquier margen */
+    padding: 0; /* Opcional: asegura que no haya padding */
+  }
+
+  

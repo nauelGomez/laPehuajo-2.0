@@ -1,0 +1,158 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  html, body {
+    width: 100%;
+    overflow-x: hidden; /* Esto ayuda a evitar el desplazamiento horizontal */
+  }
+  
+  .slider{
+  
+    width: 100%; /* Ocupa todo el ancho de la ventana */
+    height: 65vh;
+      position: relative;
+      display: flex;
+      overflow-x: scroll; /* Solo permite el desplazamiento horizontal */
+    overflow-y: hidden; 
+      scroll-snap-type: x mandatory;
+  }
+  
+  .slider img{
+    min-width: 100vw; /* Asegura que cada imagen ocupe el ancho de la ventana */
+    height: 100vh; /* Asegura que cada imagen ocupe el alto de la ventana */
+    object-fit: cover; /* Cubre el espacio sin distorsionarse */
+    scroll-snap-align: center;
+  
+  }
+    
+    .section-welcome-home {
+      font-family: 'Playfair Display', serif; /* Usa la fuente elegante que tienes */
+      text-align: center; /* Centra el texto */
+      margin-top: 17px; /* Añade un poco de espacio superior */
+      color: #333; /* Cambia el color según lo que prefieras */
+      padding-top: 16px;
+      padding-bottom: 16px;
+    }
+    
+    .section-welcome-home h2 {
+      font-size: 36px; /* Ajusta el tamaño del encabezado */
+      font-weight: bold;
+    }
+    
+    .section-welcome-home p {
+      font-size: 20px; /* Ajusta el tamaño del párrafo */
+      margin-top: 10px;
+    }
+    
+  
+  
+    .section-informative-banners .swiper-wrapper {
+      display: flex;
+      flex-wrap: wrap; /* Permite que los elementos se ajusten a la línea */
+      gap: 22px; /* Espacio entre los elementos */
+      
+    }
+    
+    .service-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly; /* Distribuye el espacio entre los iconos y el texto */
+      padding:20px 0px 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      width: 100%;
+      flex-wrap: nowrap;
+    }
+    
+    .carousel-caption{
+      font-family: 'Playfair Display', serif;
+      color: #ffffff;
+      font-size: 23px;
+    }
+    /* Contenedor general */
+  .informative-banner {
+    background-color: #dcbb7e; /* Fondo suave */
+    padding: 20px 0;
+  }
+  
+  .service-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 30px; /* Espacio entre servicios */
+  }
+  
+  /* Estilo de cada servicio */
+  .service {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Espacio entre icono y texto */
+    text-align: left;
+  }
+  
+  /* Iconos */
+  .icon {
+    font-size: 48px; /* Tamaño del icono */
+    color: #73302e; /* Color principal */
+  }
+  
+  /* Texto del servicio */
+  .service-text h4 {
+    font-size: 18px;
+    font-family: 'Playfair Display', serif;
+    font-weight: bold;
+    color: #73302e;
+    margin: 0;
+  }
+  
+  .service-text p {
+    font-size: 14px;
+    font-family: 'Playfair Display', serif;
+    color: #444;
+    margin: 0;
+  }
+  
+  /* Divisores entre servicios */
+  .divider {
+    width: 1px;
+    height: 50px;
+    background-color: #73302e; /* Color principal */
+    margin: 0 10px;
+  }
+  
+  /* Responsivo */
+  @media (max-width: 768px) {
+    .service-item {
+      flex-direction: column; /* Apila los servicios */
+      gap: 20px;
+    }
+  
+    .divider {
+      display: none; /* Oculta los divisores en móviles */
+    }
+  
+    .service {
+      justify-content: center;
+      text-align: center;
+    }
+  
+    .icon {
+      font-size: 36px; /* Ajusta el tamaño en móviles */
+    }
+  }
+  
+  
+    .js-welcome-message-text{
+      margin-left: 30px;
+      margin-right: 30px;
+    }
+  
+    .service-item{
+      background-color: #dcbb7e;
+    }
+  
+   

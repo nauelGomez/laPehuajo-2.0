@@ -1,0 +1,140 @@
+
+<mat-toolbar color="primary" class="navbar">
+  <div class="top-bar">
+    <span>🚚🚚🚚 ENVIOS GRATIS A TODO EL PAIS! 🚚🚚🚚</span>
+  </div>
+  <div class="main-bar">
+    <i>
+      <span [routerLink]="['']" class="brand">laPehuajo</span>
+      <ion-icon name="leaf-outline"></ion-icon>
+    </i>
+    <mat-form-field class="search-field" appearance="outline">
+      <input matInput placeholder="¿Qué estás buscando?" />
+      <button mat-icon-button matSuffix>
+        <ion-icon name="search-outline"></ion-icon>
+      </button>
+    </mat-form-field>
+    <div class="icons">
+      <button mat-icon-button>
+        <i>
+          <ion-icon name="help-circle-outline"></ion-icon>
+          <span class="icon-text">Ayuda</span>
+        </i>
+      </button>
+      <button mat-icon-button>
+        <i>
+          <ion-icon name="person-circle-outline"></ion-icon>
+          <span class="icon-text">Cuenta</span>
+        </i>
+      </button>
+      <button mat-icon-button (click)="toggleCart()">
+        <i class="cart-button">
+          <ion-icon name="cart-outline"></ion-icon>
+          <span class="icon-text">Carrito</span>
+          <span class="cart-counter" *ngIf="cartCount >= 0">{{ cartCount }}</span>
+        </i>
+      </button>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-toolbar color="primary" class="navbar">
+  <div class="menu-items">
+    <button mat-button [routerLink]="['']">Inicio</button>
+    <button mat-button [routerLink]="['products-estruct']">Productos</button>
+    <button mat-button [routerLink]="['contacto-form']">Contacto</button>
+    <button mat-button [routerLink]="['quienes-somos']">Quiénes somos</button>
+  </div>
+</mat-toolbar>
+
+
+<div class="cart-panel" [class.open]="isCartOpen">
+  <div class="cart-header">
+    <h3>Carrito de Compras</h3>
+    <button mat-icon-button (click)="toggleCart()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </div>
+
+  <div class="cart-content">
+    
+    <table class="cart-table">
+      <thead>
+        <tr>
+          <th>Producto</th>
+          <th>Subtotal</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of cartItems; let i = index" [class.fade-out]="item.removing">
+          <td class="product-details">
+            <img [src]="item.imageUrl" [alt]="item.name" class="product-image" />
+            <div class="product-info">
+              <h4>{{ item.name }}</h4>
+              <p>{{ item.description }}</p>
+              <p class="price">Precio: {{ '$' + item.price }}</p>
+            </div>
+            <div class="quantity-controls">
+              <button mat-icon-button (click)="decreaseQuantity(item)">
+                <mat-icon>remove</mat-icon>
+              </button>
+              <span>{{ item.quantity }}</span>
+              <button mat-icon-button (click)="increaseQuantity(item)">
+                <mat-icon>add</mat-icon>
+              </button>
+            </div>
+          </td>
+          <td class="subtotal">{{ '$' + (item.price * item.quantity) }}</td>
+        </tr>
+      </tbody>
+      
+      
+      
+    </table>
+
+    
+    <div class="progress-container">
+      <p *ngIf="calculateTotal() < 1000">
+        Envío gratis al superar los $1.000. Te faltan {{ '$' + (1000 - calculateTotal()) }}.
+      </p>
+      <p *ngIf="calculateTotal() >= 1000" class="free-shipping">¡Envío gratis disponible!</p>
+      <div class="progress-bar">
+        <div
+          class="progress"
+          [style.width]="getProgressPercentage() + '%'">
+        </div>
+      </div>
+    </div>
+
+    
+    <div class="postal-code">
+      <mat-icon>local_shipping</mat-icon>
+      <input matInput placeholder="Tu código postal" [(ngModel)]="postalCode" />
+      <button mat-raised-button color="primary" (click)="calculateShipping()">Calcular</button>
+    </div>
+
+    
+    <p class="subtotal-text">Subtotal (sin envío): {{ calculateTotal() | currency }}</p>
+
+   
+    <a href="" class="link-to-products">Ver más productos</a>
+  </div>
+
+  
+  <div class="cart-footer">
+    <button mat-raised-button color="primary" (click)="checkout()">Iniciar compra</button>
+  </div>
+</div>
+<div class="overlay" *ngIf="isCartOpen" (click)="toggleCart()"></div>
+
+ <a href="https://wa.me/1234567890" class="whatsapp-float" target="_blank" rel="noopener noreferrer">
+  <ion-icon name="logo-whatsapp"></ion-icon>
+</a>
+
+
+
+<app-carousel-products 
+  [products]="cartItems" 
+  (productAdded)="addToCart($event)">
+</app-carousel-products>
+
