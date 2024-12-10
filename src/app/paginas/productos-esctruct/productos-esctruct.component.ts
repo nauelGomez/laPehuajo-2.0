@@ -30,7 +30,6 @@ export class ProductosEsctructComponent {
 
   ngOnInit(): void {
     this.service.getProductsList().subscribe((data) => {
-      console.log('Datos recibidos de la API:', data);
       this.products = data;
       this.filteredProducts = data;
     });

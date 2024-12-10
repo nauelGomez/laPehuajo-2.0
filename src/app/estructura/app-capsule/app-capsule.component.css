@@ -11,34 +11,6 @@
     padding: 0;
     overflow-x: hidden;
   }
-
-  .quantity-cell {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-}
-
-.quantity-cell button {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background-color: #f8f8f8;
-  border: 1px solid #ddd;
-}
-
-.quantity-cell button:hover {
-  background-color: #e0e0e0;
-}
-
-.quantity-cell span {
-  min-width: 24px;
-  text-align: center;
-}
-
   
   .navbar {
     background-color: #dcbb7e;

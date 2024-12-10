@@ -7,6 +7,7 @@
     <button [ngClass]="{ active: selectedCategory === '' }" (click)="selectCategory('')">TODAS</button>
   </div>
 
+  <!-- Filtro de precio -->
   <div class="filter-price">
     <a>PRECIO $:</a>
     <input type="number" [(ngModel)]="priceRange.min" placeholder="Desde" (change)="applyFilters()" />
@@ -15,6 +16,7 @@
   </div>
 </div>
 
+<!-- Contenedor de productos -->
 <div class="product-container">
   <div *ngFor="let product of filteredProducts">
     <app-producto [productoInfo]="product"></app-producto>
