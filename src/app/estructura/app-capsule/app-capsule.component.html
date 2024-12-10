@@ -14,16 +14,10 @@
       </button>
     </mat-form-field>
     <div class="icons">
-      <button mat-icon-button>
+      <button mat-icon-button [routerLink]="['contacto-form']">
         <i>
           <ion-icon name="help-circle-outline"></ion-icon>
           <span class="icon-text">Ayuda</span>
-        </i>
-      </button>
-      <button mat-icon-button>
-        <i>
-          <ion-icon name="person-circle-outline"></ion-icon>
-          <span class="icon-text">Cuenta</span>
         </i>
       </button>
       <button mat-icon-button (click)="toggleCart()">

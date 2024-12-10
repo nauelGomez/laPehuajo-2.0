@@ -1,43 +1,9 @@
-<div class="card-container">
-  <p-carousel 
-    [value]="products" 
-    [numVisible]="3" 
-    [numScroll]="1" 
-    [circular]="false" 
-    [responsiveOptions]="responsiveOptions" 
-    class="custom-carousel">
-    
-    <!-- Usamos *ngFor dentro de la estructura de p-carousel -->
-    <ng-template let-product pTemplate="item">
-      <div class="product-card">
-        <div class="image-container">
-          <img [src]="product.imageUrl" [alt]="product.name" />
-          <p-tag
-            [value]="product.isAvailable === 'si disponible' ? 'Disponible' : 'Sin Stock'"
-            [severity]="product.isAvailable === 'si disponible' ? 'success' : 'danger'"
-            class="product-status-tag"
-          ></p-tag>
-        </div>
-        <div class="product-details">
-          <h3>{{ product.name }}</h3>
-          <p class="price">{{ '$' + product.price }}</p>
-          <div class="product-actions">
-            <button mat-raised-button color="primary" class="view-button">
-              <mat-icon>visibility</mat-icon>
-              Ver
-            </button>
-            <button 
-              mat-raised-button 
-              color="accent" 
-              class="cart-button" 
-              (click)="addProductToCart(product)"
-              [disabled]="product.isAvailable !== 'Disponible'">
-              <mat-icon>shopping_cart</mat-icon>
-              Agregar
-            </button>
-          </div>
-        </div>
-      </div>
-    </ng-template>
-  </p-carousel>
+<div class="carousel-container">
+  <button class="carousel-btn prev" (click)="prev()">&#10094;</button>
+  <div class="carousel-content" [style.transform]="translateX">
+    <div *ngFor="let product of products" class="carousel-item">
+      <app-producto [productoInfo]="product"></app-producto>
+    </div>
+  </div>
+  <button class="carousel-btn next" (click)="next()">&#10095;</button>
 </div>

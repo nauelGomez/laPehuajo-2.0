@@ -1,0 +1,49 @@
+body {
+    font-family: 'Playfair Display', serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f5f0;
+    margin-top: 70px;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 50px;
+}
+
+.text-section {
+    flex: 1;
+    padding: 20px;
+    color: #73302e;
+}
+
+.text-section h1 {
+    font-size: 2.5rem;
+    color: #ea6834;
+    margin-bottom: 20px;
+}
+
+.text-section p {
+    line-height: 1.8;
+    font-size: 1.1rem;
+}
+
+.image-section {
+    flex: 1;
+    padding: 20px;
+}
+
+.image-section img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        flex-direction: column;
+    }
+}

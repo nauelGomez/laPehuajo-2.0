@@ -12,12 +12,13 @@
   .slider{
   
     width: 100%; /* Ocupa todo el ancho de la ventana */
-    height: 65vh;
+    height: 45vh;
       position: relative;
       display: flex;
       overflow-x: scroll; /* Solo permite el desplazamiento horizontal */
     overflow-y: hidden; 
       scroll-snap-type: x mandatory;
+      margin-top: 58px;
   }
   
   .slider img{
