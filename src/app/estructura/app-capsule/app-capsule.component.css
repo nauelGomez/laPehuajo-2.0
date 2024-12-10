@@ -105,7 +105,6 @@
     font-family: 'Playfair Display', serif;
   }
   
-  
   input[matInput] {
     font-size: 16px;
     padding: 12px 15px ;
@@ -116,6 +115,7 @@
     height: 120%;
     max-width: 2000px;
     color: #73302e;
+    text-align: center;
   }
   
   .icons {

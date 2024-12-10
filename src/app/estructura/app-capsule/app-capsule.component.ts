@@ -9,6 +9,7 @@ import { RootObject } from '../../services/servicio productos/product.interface'
 import { CarouselProductsComponent } from '../../paginas/carousel-products/carousel-products.component';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
+import { SearchService } from '../../services/servicio search/search.service';
 
 @Component({
   selector: 'app-app-capsule',
@@ -22,7 +23,7 @@ import { CarritoService } from '../../services/servicio carrito/carrito.service'
 export class AppCapsuleComponent implements OnInit {
   acc: ((previousValue: RootObject, currentValue: RootObject, currentIndex: number, array: RootObject[]) => RootObject) | undefined;
   router: any;
-  constructor(private renderer: Renderer2, private carritoService: CarritoService) { }
+  constructor(private renderer: Renderer2, private carritoService: CarritoService, private searchService: SearchService) { }
   cartItems: (RootObject & { quantity: number })[] = [];
   isCartOpen: boolean = false;
   isLoading: boolean = true; // Estado de carga
@@ -33,11 +34,9 @@ export class AppCapsuleComponent implements OnInit {
 
 
   onSearch(): void {
-    if (this.searchTerm.trim()) {
-      this.router.navigate(['/products-estruct'], { queryParams: { search: this.searchTerm } });
-    }
+    this.searchService.setSearchTerm(this.searchTerm);
   }
-
+  
   getProgressPercentage(): number {
     const total = this.calculateTotal();
     return Math.min((total / 1000) * 100, 100);
