@@ -15,7 +15,9 @@ body { margin: 0; }
  .service-item{
     box-shadow: none !important;
  }
-
+button{
+  font-family: 'Playfair Display', serif;
+}
 .mdc-button__label{
   color: #73302e;
 }

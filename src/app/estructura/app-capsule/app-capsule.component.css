@@ -152,6 +152,30 @@
     font-size: 24px;
   }
   
+
+  .quantity-cell {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px; /* Espaciado entre flechas y número */
+}
+
+.arrow-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.quantity-number {
+    font-size: 16px;
+    text-align: center;
+    min-width: 24px; /* Asegura que el número tenga espacio fijo */
+}
+
+
   .icon-text {
     font-size: 14px; /* Ajusta el tamaño del texto para que se vea más elegante */
   color: white;
@@ -165,7 +189,7 @@
   font-family: 'Poppins', sans-serif; /* Puedes cambiar esta fuente por una más elegante */
   color: white;
   margin-bottom: 0px;
-  color: #ea6834;
+  color: #ca704c;
   }
   
   .divider {

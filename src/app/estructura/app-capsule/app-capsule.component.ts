@@ -61,7 +61,20 @@ export class AppCapsuleComponent implements OnInit {
   toggleCart(): void {
     this.isCartOpen = !this.isCartOpen;
   }
-
+  increaseQuantity(item: RootObject & { quantity: number }): void {
+    item.quantity++;
+    this.calculateTotal(); // Actualiza el total después de incrementar
+  }
+  
+  decreaseQuantity(item: RootObject & { quantity: number }): void {
+    if (item.quantity > 1) {
+      item.quantity--;
+    } else {
+      item.quantity--;
+      this.removeFromCart(item.id); // Si la cantidad llega a 0, elimina el producto del carrito
+    }
+    this.calculateTotal(); // Actualiza el total después de decrementar o eliminar
+  }
   updateQuantity(event: { productId: number; quantity: number }): void {
     const product = this.cartItems.find(item => item.id === event.productId);
     if (product) {
