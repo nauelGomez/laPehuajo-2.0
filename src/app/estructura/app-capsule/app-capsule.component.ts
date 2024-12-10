@@ -5,7 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Product, RootObject } from '../../services/servicio productos/product.interface';
+import { RootObject } from '../../services/servicio productos/product.interface';
 import { CarouselProductsComponent } from '../../paginas/carousel-products/carousel-products.component';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
@@ -21,6 +21,7 @@ import { CarritoService } from '../../services/servicio carrito/carrito.service'
 })
 export class AppCapsuleComponent implements OnInit {
   acc: ((previousValue: RootObject, currentValue: RootObject, currentIndex: number, array: RootObject[]) => RootObject) | undefined;
+  router: any;
   constructor(private renderer: Renderer2, private carritoService: CarritoService) { }
   cartItems: (RootObject & { quantity: number })[] = [];
   isCartOpen: boolean = false;
@@ -28,7 +29,14 @@ export class AppCapsuleComponent implements OnInit {
   cartCount: number = 0;
   cartTotal: number = 0;
   postalCode: string = '';
+  searchTerm: string = '';
 
+
+  onSearch(): void {
+    if (this.searchTerm.trim()) {
+      this.router.navigate(['/products-estruct'], { queryParams: { search: this.searchTerm } });
+    }
+  }
 
   getProgressPercentage(): number {
     const total = this.calculateTotal();

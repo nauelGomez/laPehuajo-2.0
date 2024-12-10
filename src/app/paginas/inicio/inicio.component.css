@@ -156,4 +156,51 @@
       background-color: #dcbb7e;
     }
   
-   
+   /* Sección parallax */
+.parallax-section {
+  position: relative;
+  background-image: url('https://images7.alphacoders.com/133/thumb-1920-1339729.png');
+  background-size: cover; /* Asegura que la imagen cubra todo el contenedor */
+  background-attachment: fixed; /* Parallax */
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 60vh; /* Altura ajustable */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white; /* Texto en blanco para contraste */
+}
+
+.parallax-content {
+  background-color: rgba(0, 0, 0, 0.5); /* Fondo semitransparente para destacar el texto */
+  padding: 20px;
+  border-radius: 10px;
+  max-width: 800px;
+}
+
+.parallax-content h2 {
+  font-size: 36px;
+  margin-bottom: 15px;
+  font-family: 'Playfair Display', serif;
+}
+
+.parallax-content p {
+  font-size: 18px;
+  font-family: 'Playfair Display', serif;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .parallax-section {
+    height: 40vh; /* Reduce la altura en móviles */
+  }
+
+  .parallax-content h2 {
+    font-size: 28px;
+  }
+
+  .parallax-content p {
+    font-size: 16px;
+  }
+}

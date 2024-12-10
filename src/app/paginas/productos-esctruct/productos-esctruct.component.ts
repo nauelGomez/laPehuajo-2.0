@@ -4,7 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { RootObject } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { ProductoComponent } from "../../estructura/producto/producto.component";
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
+
 
 
 
@@ -23,25 +24,32 @@ export class ProductosEsctructComponent {
   
   priceRange: { min: number, max: number } = { min: 0, max: 10000 };
   selectedCategory: string = '';
-
+  searchQuery: string = '';
+  
   categories: string[] = ['Mieles', 'Pastas', 'Frutos Secos'];
 
-  constructor(private service: ProductService) {}
+  constructor(private service: ProductService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.service.getProductsList().subscribe((data) => {
-      console.log('Datos recibidos de la API:', data);
       this.products = data;
       this.filteredProducts = data;
+  
+      this.route.queryParams.subscribe((params: Params) => {
+        this.searchQuery = params['search'] || '';
+        this.applyFilters()
+      });
     });
   }
+  
 
   // Filtrar por precio y categoría
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) => {
       const priceMatch = product.price >= this.priceRange.min && product.price <= this.priceRange.max;
       const categoryMatch = this.selectedCategory ? product.category.name === this.selectedCategory : true;
-      return priceMatch && categoryMatch;
+      const searchMatch = this.searchQuery ? product.title.toLowerCase().includes(this.searchQuery.toLowerCase()) : true;
+      return priceMatch && categoryMatch && searchMatch;
     });
   }
 
