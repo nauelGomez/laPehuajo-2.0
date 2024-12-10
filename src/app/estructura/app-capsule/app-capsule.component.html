@@ -77,23 +77,32 @@
           <tr *ngFor="let item of cartItems">
             <td class="product-details">
               <img
-                [src]="item.images?.[0] || 'default-image.jpg'"
+                [src]="item.images[0]"
                 [alt]="item.title"
                 class="product-image"
               />
               <div>
                 <p class="product-title">{{ item.title }}</p>
-                <p class="product-description">{{ item.description }}</p>
                 <p class="product-category">Categoría: {{ item.category.name }}</p>
               </div>
             </td>
             <td>{{ item.price | currency }}</td>
-            <td>{{ item.quantity }}</td>
+            <td class="quantity-cell">
+              <button class="arrow-button" (click)="decreaseQuantity(item)">
+                <mat-icon>chevron_left</mat-icon>
+              </button>
+              <span class="quantity-number">{{ item.quantity }}</span>
+              <button class="arrow-button" (click)="increaseQuantity(item)">
+                <mat-icon>chevron_right</mat-icon>
+              </button>
+            </td>
             <td>{{ (item.price * item.quantity) | currency }}</td>
+        
           </tr>
         </tbody>
       </table>
     </div>
+    
   
     <!-- Mensaje si el carrito está vacío -->
     <p *ngIf="!isLoading && cartItems.length === 0">El carrito está vacío.</p>

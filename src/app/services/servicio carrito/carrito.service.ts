@@ -24,30 +24,13 @@ import {RootObject } from '../../services/servicio productos/product.interface';
     }
   
     getCartItems(): void {
-      // Simula una llamada a la API que devuelve productos en el carrito
+      
       setTimeout(() => {
         const mockData: (RootObject & { quantity: number })[] = [
-          {
-            id: 1,
-            title: 'Miel Natural',
-            price: 450,
-            description: 'Miel pura de abeja',
-            category: { id: 1, name: 'Mieles', image: 'category1.jpg' },
-            images: ['miel.jpg'],
-            quantity: 2,
-          },
-          {
-            id: 2,
-            title: 'Pasta Integral',
-            price: 250,
-            description: 'Pasta hecha de trigo integral',
-            category: { id: 2, name: 'Pastas', image: 'category2.jpg' },
-            images: ['pasta.jpg'],
-            quantity: 1,
-          },
+          // lo dejo vacio pq no necesito probar
         ];
         this.cartItemsSubject.next(mockData);
-      }, 2000); // Simulación de tiempo de carga
+      }, 2000); 
     }
   
   

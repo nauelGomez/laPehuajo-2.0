@@ -29,6 +29,7 @@
   flex-wrap: wrap; /* Permite que los botones se ajusten en pantallas pequeñas */
   justify-content: center; /* Centra los botones */
   width: 100%;
+  font-family: 'Playfair Display', serif;
 }
 
 .filter-category button {

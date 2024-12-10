@@ -4,6 +4,10 @@ html, body { height: 100%; }
 body { margin: 0; }
 /* Contenedor general del carrusel */
 
+button{
+  font-family: 'Playfair Display', serif;
+}
+
 .p-carousel-indicators {
     display: flex !important;
     justify-content: center !important;

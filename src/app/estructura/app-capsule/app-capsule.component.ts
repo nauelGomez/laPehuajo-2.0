@@ -5,16 +5,16 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { Product, RootObject } from '../../services/servicio productos/product.interface';
+import { RootObject } from '../../services/servicio productos/product.interface';
 import { CarouselProductsComponent } from '../../paginas/carousel-products/carousel-products.component';
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
-import { CarroComponent } from "../carro/carro.component";
+
 
 @Component({
   selector: 'app-app-capsule',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, CarouselProductsComponent, RouterLink, CarroComponent],
+  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, CarouselProductsComponent, RouterLink],
   templateUrl: './app-capsule.component.html',
   styleUrl: './app-capsule.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -49,7 +49,22 @@ export class AppCapsuleComponent implements OnInit {
     });
     this.carritoService.getCartItems(); // Inicia la carga de datos
   }
-
+  increaseQuantity(item: RootObject & { quantity: number }): void {
+    item.quantity++;
+    this.calculateTotal(); // Actualiza el total después de incrementar
+  }
+  
+  decreaseQuantity(item: RootObject & { quantity: number }): void {
+    if (item.quantity > 1) {
+      item.quantity--;
+    } else {
+      item.quantity--;
+      this.removeFromCart(item.id); // Si la cantidad llega a 0, elimina el producto del carrito
+    }
+    this.calculateTotal(); // Actualiza el total después de decrementar o eliminar
+  }
+  
+  
   checkout(): void {
     console.log('Compra finalizada:', this.cartItems);
   }
