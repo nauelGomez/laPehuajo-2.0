@@ -11,7 +11,7 @@ export class ProductService {
   constructor (private http: HttpClient) {}
 
   getProductsList(): Observable<RootObject[]> {
-    return this.http.get<RootObject[]>(`${this.apiUrl}?offset=3&limit=20`);
+    return this.http.get<RootObject[]>(`${this.apiUrl}?offset=0&limit=20`);
   }
 
   getProductById(id: number): Observable<RootObject> {
