@@ -122,7 +122,7 @@
     display: flex;
     align-items: flex-start; 
     justify-content: space-around; 
-    padding-bottom: 28px;
+    padding-bottom: 38px;
     padding-right: 10px;
     flex-wrap: nowrap;
     gap: 20px; /* Aumenta el espacio entre los íconos */
