@@ -72,7 +72,7 @@
           <tr *ngFor="let item of cartItems">
             <td class="product-details">
               <img
-                [src]="item.images[0] || 'default-image.jpg'"
+                [src]="sanitizeAndCleanImageUrl(item.images[0])"
                 [alt]="item.title"
                 class="product-image"
               />

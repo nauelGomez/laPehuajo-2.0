@@ -18,15 +18,24 @@ export class ProductoComponent {
     return this.sanitizer.bypassSecurityTrustUrl(url);
 
   }
-  sanitizeAndCleanImageUrl(url: string): SafeUrl {
-    if (url.startsWith('[') && url.endsWith(']')) {
-      url = url.slice(1, -1); // Elimina corchetes
+  sanitizeAndCleanImageUrl(url: string | null | undefined): SafeUrl {
+    const defaultImage =
+      'https://acdn.mitiendanube.com/stores/323/592/products/img-20231012-wa0056-097b4c15c4308e8df1169715166873871-029ec1e6a45de7d7fb16971516780497-640-0.jpg';
+  
+    if (!url) {
+      url = defaultImage;
+    } else {
+      if (url.startsWith('[') && url.endsWith(']')) {
+        url = url.slice(1, -1);
+      }
+      url = url.replace(/^"|"$/g, '');
     }
-    // Elimina las comillas dobles extra si existen
-    url = url.replace(/^"|"$/g, ''); // Elimina comillas al inicio y al final
+  
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
   
+  
+
   
   
 }

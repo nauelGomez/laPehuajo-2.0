@@ -10,6 +10,7 @@ import { CarouselProductsComponent } from '../../paginas/carousel-products/carou
 import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
 import { SearchService } from '../../services/servicio search/search.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-app-capsule',
@@ -23,7 +24,7 @@ import { SearchService } from '../../services/servicio search/search.service';
 export class AppCapsuleComponent implements OnInit {
   acc: ((previousValue: RootObject, currentValue: RootObject, currentIndex: number, array: RootObject[]) => RootObject) | undefined;
   router: any;
-  constructor(private renderer: Renderer2, private carritoService: CarritoService, private searchService: SearchService) { }
+  constructor(private renderer: Renderer2, private carritoService: CarritoService,private sanitizer: DomSanitizer ,private searchService: SearchService) { }
   cartItems: (RootObject & { quantity: number })[] = [];
   isCartOpen: boolean = false;
   isLoading: boolean = true; // Estado de carga
@@ -125,6 +126,19 @@ export class AppCapsuleComponent implements OnInit {
       iconButtons.forEach(button => button.classList.remove('small-button'));
       icons.forEach(icon => icon.classList.remove('small-icon'));
     }
+  }
+
+  sanitizeImageUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+
+  }
+  sanitizeAndCleanImageUrl(url: string): SafeUrl {
+    if (url.startsWith('[') && url.endsWith(']')) {
+      url = url.slice(1, -1); // Elimina corchetes
+    }
+    // Elimina las comillas dobles extra si existen
+    url = url.replace(/^"|"$/g, ''); // Elimina comillas al inicio y al final
+    return this.sanitizer.bypassSecurityTrustUrl(url);
   }
 }
 
