@@ -5,6 +5,7 @@ import { RootObject } from '../../services/servicio productos/product.interface'
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
+import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-producto-view',
@@ -26,7 +27,8 @@ export class ProductoViewComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private productService: ProductService,
-    private carritoService: CarritoService
+    private carritoService: CarritoService,
+    private sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +82,18 @@ export class ProductoViewComponent implements OnInit {
     this.isAnimating = false; // Detenemos la animación al finalizar
   }
 
+  sanitizeImageUrl(url: string): SafeUrl {
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+
+  }
+  sanitizeAndCleanImageUrl(url: string): SafeUrl {
+    if (url.startsWith('[') && url.endsWith(']')) {
+      url = url.slice(1, -1); // Elimina corchetes
+    }
+    // Elimina las comillas dobles extra si existen
+    url = url.replace(/^"|"$/g, ''); // Elimina comillas al inicio y al final
+    return this.sanitizer.bypassSecurityTrustUrl(url);
+  }
   
   
 }

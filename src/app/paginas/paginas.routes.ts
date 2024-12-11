@@ -5,6 +5,8 @@ import { ProductosEsctructComponent } from './productos-esctruct/productos-esctr
 import { QuienesSomosComponent } from './quienes-somos/quienes-somos.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ProductoViewComponent } from './producto-view/producto-view.component';
+import { LoginComponent } from './login/login.component';
+import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 
 
 export const AUTH_ROUTES: Routes = [
@@ -17,6 +19,8 @@ export const AUTH_ROUTES: Routes = [
     { path: 'quienes-somos', component: QuienesSomosComponent },
     { path: 'contacto-form', component: ContactoComponent },
     { path: 'producto-view/:id', component: ProductoViewComponent },
+    { path: 'login', component: LoginComponent},
+    { path: 'admin-panel', component: AdminPanelComponent}
 
   
 ];

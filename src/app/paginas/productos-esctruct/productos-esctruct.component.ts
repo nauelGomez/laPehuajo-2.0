@@ -6,9 +6,6 @@ import { ProductService } from '../../services/servicio productos/product.servic
 import { ProductoComponent } from "../../estructura/producto/producto.component";
 import { SearchService } from '../../services/servicio search/search.service';
 
-
-
-
 @Component({
   selector: 'app-productos-esctruct',
   standalone: true,

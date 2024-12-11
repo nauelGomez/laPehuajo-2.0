@@ -12,7 +12,7 @@
         <div class="carousel">
           <img
             class="main-image"
-            [src]="mainImage"
+            [src]="sanitizeAndCleanImageUrl(product.images[0])"
             [alt]="product.title"
             [class.fade]="isAnimating"
             (animationend)="onAnimationEnd()"
@@ -22,7 +22,7 @@
           <img
             *ngFor="let image of product.images; let i = index"
             class="thumbnail"
-            [src]="image"
+            [src]="sanitizeAndCleanImageUrl(image)"
             [alt]="'Imagen ' + (i + 1) + ' de ' + product.title"
             (click)="onThumbnailClick(i)"
           />

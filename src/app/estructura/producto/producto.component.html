@@ -2,7 +2,8 @@
     <div class="product-card" >
         <h3>{{ productoInfo.title }}</h3>
         <div class="image-container">
-          <img [src]="productoInfo.images[0]" alt="Product Image" />
+          <img [src]="sanitizeAndCleanImageUrl(productoInfo.images[0])" alt="Product Image" />
+
         </div>
         <div class="price">
         <p>Precio: ${{ productoInfo.price }}</p>
