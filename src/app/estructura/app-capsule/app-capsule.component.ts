@@ -31,7 +31,7 @@ export class AppCapsuleComponent implements OnInit {
   cartTotal: number = 0;
   postalCode: string = '';
   searchTerm: string = '';
-
+  showSearch: boolean = false;
 
   onSearch(): void {
     this.searchService.setSearchTerm(this.searchTerm);
@@ -53,7 +53,9 @@ export class AppCapsuleComponent implements OnInit {
       this.isLoading = false; // Cambia el estado cuando los datos están listos
       this.calculateTotal();
     });
-    this.carritoService.getCartItems(); // Inicia la carga de datos
+    this.carritoService.getCartItems(); 
+    
+    
   }
 
   checkout(): void {

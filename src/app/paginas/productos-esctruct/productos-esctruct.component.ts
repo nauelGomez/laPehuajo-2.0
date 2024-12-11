@@ -41,10 +41,7 @@ export class ProductosEsctructComponent {
       this.searchTerm = term;
       this.applyFilters();
     });
-
-
   }
-
   // Filtrar por precio y categoría
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) => {
