@@ -1,0 +1,36 @@
+<!-- product-modal.component.html -->
+<div class="modal">
+    <div class="modal-content">
+      <h2>Crear Producto</h2>
+      <form (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <label for="title">Título</label>
+          <input id="title" type="text" [(ngModel)]="product.title" name="title" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="price">Precio</label>
+          <input id="price" type="number" [(ngModel)]="product.price" name="price" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="description">Descripción</label>
+          <textarea id="description" [(ngModel)]="product.description" name="description" required></textarea>
+        </div>
+  
+        <div class="form-group">
+          <label for="categoryId">ID de Categoría</label>
+          <input id="categoryId" type="number" [(ngModel)]="product.categoryId" name="categoryId" required />
+        </div>
+  
+        <div class="form-group">
+          <label for="images">Imágenes (URL)</label>
+          <input id="images" type="text" [(ngModel)]="product.images[0]" name="images" required />
+        </div>
+  
+        <button type="submit">Crear</button>
+        <button type="button" (click)="closeModal()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  

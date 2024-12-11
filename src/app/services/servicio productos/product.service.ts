@@ -19,6 +19,9 @@ export class ProductService {
     return this.http.get<RootObject>(`https://api.escuelajs.co/api/v1/products/${id}`);
   }
   
+  createProduct(product: Product): Observable<Product> {
+    return this.http.post<Product>(this.apiUrl, product);
+  }
   
   private cartItemsSubject = new BehaviorSubject<Product[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
@@ -30,22 +33,5 @@ export class ProductService {
     const currentItems = this.cartItemsSubject.getValue();
 
   // Asegúrate de que la cantidad siempre está definida
-  const existingProduct = currentItems.find((item) => item.id === product.id);
-
-  if (existingProduct) {
-    existingProduct.quantity = (existingProduct.quantity || 0) + 1;
-  } else {
-    currentItems.push({ ...product, quantity: 1 });
-  }
-
-  this.cartItemsSubject.next([...currentItems]);
-  this.updateCartCount();
-  }
-
-  updateCartCount(): void {
-    const totalCount = this.cartItemsSubject
-      .getValue()
-      .reduce((count, item) => count + (item.quantity || 0), 0);
-    this.cartCountSubject.next(totalCount);
-  }
+}
 }
