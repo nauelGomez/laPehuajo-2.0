@@ -11,12 +11,11 @@
       <div class="product-images">
         <div class="carousel">
           <img
-            class="main-image"
-            [src]="sanitizeAndCleanImageUrl(product.images[0])"
-            [alt]="product.title"
-            [class.fade]="isAnimating"
-            (animationend)="onAnimationEnd()"
-          />
+  class="main-image"
+  [src]="sanitizeAndCleanImageUrl(mainImage)"
+  [alt]="product.title"
+  [class.fade]="isAnimating"
+/>
         </div>
         <div class="thumbnail-container">
           <img

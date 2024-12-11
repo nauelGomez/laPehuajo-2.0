@@ -75,8 +75,14 @@ export class ProductoViewComponent implements OnInit {
   }
 
   onThumbnailClick(index: number): void {
-    this.currentIndex = index;
-    this.mainImage = this.product.images[index]; // Cambiar la imagen principal
+    if (this.currentIndex !== index) {
+      this.isAnimating = true; // Activa la animación
+      this.currentIndex = index; // Actualiza el índice actual
+      setTimeout(() => {
+        this.mainImage = this.product.images[index]; // Cambia la imagen después de un pequeño delay
+        this.isAnimating = false; // Desactiva la animación después de completarla
+      }, 300); // Tiempo igual al de la animación CSS
+    }
   }
   onAnimationEnd(): void {
     this.isAnimating = false; // Detenemos la animación al finalizar

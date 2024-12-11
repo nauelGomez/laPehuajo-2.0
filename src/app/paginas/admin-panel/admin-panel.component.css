@@ -1,3 +1,48 @@
-.body{
-    margin-top: 70px;
-}
+.admin-panel {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #fdf5e6; /* Fondo claro */
+    font-family: 'Playfair Display', serif;
+  }
+  
+  .card-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+  }
+  
+  .card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  
+  .card-icon {
+    font-size: 40px; /* Tamaño del icono */
+    color: #ea6834; /* Color del icono */
+    margin-bottom: 15px;
+  }
+  
+  .card h3 {
+    margin: 0 0 10px;
+    color: #73302e;
+  }
+  
+  .card p {
+    color: #6b705c;
+    font-size: 14px;
+  }
+  

@@ -1,6 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalSubirPorductoComponent } from './modal-subir-porducto.component';
+import { ModalSubirPorductoComponent } from './subir-porducto.component';
 
 describe('ModalSubirPorductoComponent', () => {
   let component: ModalSubirPorductoComponent;

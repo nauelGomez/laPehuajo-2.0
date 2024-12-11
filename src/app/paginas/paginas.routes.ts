@@ -7,7 +7,7 @@ import { ContactoComponent } from './contacto/contacto.component';
 import { ProductoViewComponent } from './producto-view/producto-view.component';
 import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
-import { ModalSubirPorductoComponent } from './modal-subir-porducto/modal-subir-porducto.component';
+import {  SubirProductoComponent } from './modal-subir-porducto/subir-porducto.component';
 
 
 export const AUTH_ROUTES: Routes = [
@@ -21,10 +21,9 @@ export const AUTH_ROUTES: Routes = [
     { path: 'contacto-form', component: ContactoComponent },
     { path: 'producto-view/:id', component: ProductoViewComponent },
     { path: 'login', component: LoginComponent},
-    { path: 'admin-panel', component: AdminPanelComponent, children: [{
-      path: 'modal-productos', component: ModalSubirPorductoComponent
-    }
-    ]}
+    { path: 'admin-panel', component: AdminPanelComponent},
+    {path: 'subir-productos', component: SubirProductoComponent}
+  
 
   
 ];

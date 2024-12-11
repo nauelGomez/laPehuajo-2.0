@@ -1,0 +1,51 @@
+<div class="create-product-container">
+  <div class="create-product-content">
+    <h2>Crear Producto</h2>
+    <form (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="title">Título</label>
+        <input id="title" type="text" [(ngModel)]="product.title" name="title" required />
+      </div>
+
+      <div class="form-group">
+        <label for="price">Precio</label>
+        <input id="price" type="number" [(ngModel)]="product.price" name="price" required />
+      </div>
+
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea
+          id="description"
+          [(ngModel)]="product.description"
+          name="description"
+          required
+        ></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="categoryId">ID de Categoría</label>
+        <input id="categoryId" type="number" [(ngModel)]="product.categoryId" name="categoryId" required />
+      </div>
+
+      <div class="form-group">
+        <label for="images">Imágenes</label>
+        <div *ngFor="let image of product.images; let i = index" class="image-input">
+          <input
+            type="text"
+            [(ngModel)]="product.images[i]"
+            name="images{{i}}"
+            placeholder="URL de la imagen"
+            required
+          />
+          <button type="button" class="remove-image" (click)="removeImage(i)">✕</button>
+        </div>
+        <button type="button" class="add-image" (click)="addImage()">Agregar Imagen</button>
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" class="btn-create">Crear</button>
+        <button type="button" class="btn-cancel" (click)="closeTab()">Cancelar</button>
+      </div>
+    </form>
+  </div>
+</div>

@@ -1,5 +1,31 @@
-<p>admin-panel works!</p>
-<button (click)="openModal()">Crear Producto</button>
-<app-modal-subir-porducto
+<div class="admin-panel">
+    <div class="card-container">
+    
+      <div class="card" [routerLink]="['/subir-productos']">
+        <div class="card-icon">
+          <mat-icon >add_circle</mat-icon>
+        </div>
+        <h3>Crear Producto</h3>
+        <p>Agrega un nuevo producto al catálogo de forma rápida y sencilla.</p>
+      </div>
   
-></app-modal-subir-porducto>
+      <!-- Tarjeta 2: Editar Producto -->
+      <div class="card">
+        <div class="card-icon">
+          <mat-icon>edit</mat-icon>
+        </div>
+        <h3>Editar Producto</h3>
+        <p>Modifica los detalles de los productos existentes.</p>
+      </div>
+  
+      <!-- Tarjeta 3: Eliminar Producto -->
+      <div class="card">
+        <div class="card-icon">
+          <mat-icon>delete</mat-icon>
+        </div>
+        <h3>Eliminar Producto</h3>
+        <p>Elimina productos que ya no estén disponibles en el catálogo.</p>
+      </div>
+    </div>
+  </div>
+  

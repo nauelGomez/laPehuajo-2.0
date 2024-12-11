@@ -1,0 +1,131 @@
+.body{
+  margin-top: 70px;
+}
+
+.create-product-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 20px; /* Espaciado */
+  background-color: #fdf5e6; /* Fondo suave */
+  min-height: calc(100vh - 100px); /* No ocupa toda la pantalla */
+}
+
+.create-product-content {
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  width: 100%;
+  max-width: 600px; /* Ancho máximo */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  margin-bottom: 20px;
+  color: #73302e;
+  text-align: center;
+  font-size: 24px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  color: #73302e;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+input,
+textarea {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #dcbb7e;
+  border-radius: 4px;
+  font-size: 14px;
+  background-color: #fdf5e6; /* Fondo claro */
+}
+
+textarea {
+  resize: none; /* Evitar cambio de tamaño */
+}
+
+.image-input {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.remove-image {
+  background: #ea6834;
+  border: none;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 4px;
+}
+
+.remove-image:hover {
+  background: #73302e;
+}
+
+.add-image {
+  display: block;
+  margin-top: 10px;
+  background: #dcbb7e;
+  border: none;
+  color: #fff;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.add-image:hover {
+  background: #73302e;
+}
+
+.form-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.btn-create {
+  background: #ea6834;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-create:hover {
+  background: #73302e;
+}
+
+.btn-cancel {
+  background: #dcbb7e;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.btn-cancel:hover {
+  background: #73302e;
+}
+
+@media (max-width: 768px) {
+  .create-product-content {
+    padding: 20px;
+  }
+
+  h2 {
+    font-size: 20px;
+  }
+}

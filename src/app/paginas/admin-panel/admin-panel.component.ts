@@ -1,21 +1,14 @@
 import { Component } from '@angular/core';
-import { ModalSubirPorductoComponent } from "../modal-subir-porducto/modal-subir-porducto.component";
+import { MatIcon } from '@angular/material/icon';
+import { RouterLink, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-admin-panel',
   standalone: true,
-  imports: [ModalSubirPorductoComponent],
+  imports: [MatIcon, RouterLink, RouterModule],
   templateUrl: './admin-panel.component.html',
   styleUrl: './admin-panel.component.css'
 })
 export class AdminPanelComponent {
-  isModalOpen = false;
-
-  openModal(): void {
-    this.isModalOpen = true;
-  }
-
-  closeModal(): void {
-    this.isModalOpen = false;
-  }
+  
 }

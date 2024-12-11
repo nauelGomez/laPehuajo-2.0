@@ -5,6 +5,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { HttpClient } from '@angular/common/http';
 		FormsModule,
 		BrowserAnimationsModule,
 		CommonModule,
-	FormsModule],
+	FormsModule,
+	RouterModule.forRoot([])],
 	providers: []
 })
 export class AppModule {
