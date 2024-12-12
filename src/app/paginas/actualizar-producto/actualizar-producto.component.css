@@ -1,0 +1,183 @@
+
+
+.modal{
+  margin-top: 60px;
+}
+
+.product-container {
+  font-family: 'Playfair Display', serif;
+  max-width: 1200px;
+  margin: auto;
+  padding: 20px;
+  margin-top: 50px;
+}
+
+.product-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #dcbb7e;
+  border: 1px solid #73302e;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 8px;
+}
+
+.product-image {
+  max-width: 100px;
+  border-radius: 8px;
+}
+
+.edit-button {
+  background-color: #ea6834;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+/* Estilo actualizado del modal */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  overflow-y: auto; /* Permite desplazamiento vertical */
+}
+
+.modal-content {
+  background: #fefefe;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  animation: fadeIn 0.3s ease-out;
+  max-height: 90vh; /* Limita la altura del modal */
+  overflow-y: auto; /* Añade scrollbar si es necesario */
+}
+
+/* Animación para suavizar la entrada del modal */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.close-button {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  font-weight: bold;
+  color: #333;
+  cursor: pointer;
+}
+
+.close-button:hover {
+  color: #ff4d4d;
+}
+
+.modal-content h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #333;
+}
+
+textarea {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+textarea:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+input[type="text"],
+input[type="number"] {
+  flex: 1;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 14px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+input[type="text"]:focus,
+input[type="number"]:focus {
+  border-color: #4caf50;
+  outline: none;
+}
+
+.images-section {
+  margin-top: 20px;
+}
+
+.image-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.image-item input {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.image-item button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 5px 10px;
+  cursor: pointer;
+}
+
+.image-item button:hover {
+  background-color: #c0392b;
+}
+
+button.save-button,
+button.add-button {
+  background-color: #ea6834;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
+}
+
+button.save-button:hover,
+button.add-button:hover {
+  background-color: #d55a2e;
+}

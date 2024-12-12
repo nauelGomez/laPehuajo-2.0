@@ -9,6 +9,7 @@ import { LoginComponent } from './login/login.component';
 import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import {  SubirProductoComponent } from './modal-subir-porducto/subir-porducto.component';
 import { EliminarProductoComponent } from './eliminar-producto/eliminar-producto.component';
+import { ActualizarProductoComponent } from './actualizar-producto/actualizar-producto.component';
 
 
 export const AUTH_ROUTES: Routes = [
@@ -24,7 +25,8 @@ export const AUTH_ROUTES: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'admin-panel', component: AdminPanelComponent},
     {path: 'subir-productos', component: SubirProductoComponent},
-    {path: 'eliminar-productos', component: EliminarProductoComponent}
+    {path: 'eliminar-productos', component: EliminarProductoComponent},
+    {path: 'actualizar-productos', component: ActualizarProductoComponent}
   
 
   

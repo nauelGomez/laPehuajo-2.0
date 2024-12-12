@@ -15,8 +15,18 @@ body { margin: 0; }
  .service-item{
     box-shadow: none !important;
  }
+
+ 
 button{
   font-family: 'Playfair Display', serif;
+  background-color: #ea6834;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 20px;
 }
 .mdc-button__label{
   color: #73302e;

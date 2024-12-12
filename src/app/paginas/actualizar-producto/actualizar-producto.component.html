@@ -1,0 +1,57 @@
+<div class="product-container">
+  <h1>Actualizar Productos</h1>
+
+  <!-- Lista de productos -->
+  <div *ngIf="filteredProducts.length > 0; else noProducts">
+    <div *ngFor="let product of filteredProducts" class="product-card">
+      <div>
+        <img [src]="product.images[0]" alt="{{ product.title }}" class="product-image" />
+        <h2>{{ product.title }}</h2>
+      </div>
+      <button class="edit-button" (click)="editProduct(product)">Editar</button>
+    </div>
+  </div>
+
+  <!-- Modal de edición -->
+  <div *ngIf="editingProduct" class="modal">
+    <div class="modal-content">
+      <h2>Editando: {{ editingProduct.title }}</h2>
+      <button class="close-button" (click)="closeModal()">×</button>
+
+      <!-- Formulario de edición -->
+      <label>
+        Título:
+        <input type="text" [(ngModel)]="editingProduct.title" />
+      </label>
+      <label>
+        
+        <br>
+        Precio:
+        <input type="number" [(ngModel)]="editingProduct.price" />
+      </label>
+      <label>
+        <br>
+        <br>
+        Descripción:
+        <textarea [(ngModel)]="editingProduct.description"></textarea>
+      </label>
+
+      <!-- Edición de imágenes -->
+      <div class="images-section">
+        <h3>Imágenes</h3>
+        <div *ngFor="let image of editingProduct.images; let i = index" class="image-item">
+          <input [(ngModel)]="editingProduct.images[i]" placeholder="URL de la imagen" />
+          <button (click)="removeImage(i)">Eliminar</button>
+        </div>
+        <button (click)="addImage()">Agregar Imagen</button><button (click)="saveChanges()">Guardar Cambios</button>
+      </div>
+
+      
+    </div>
+  </div>
+
+  <!-- Plantilla para cuando no hay productos -->
+  <ng-template #noProducts>
+    <p>No hay productos disponibles.</p>
+  </ng-template>
+</div>
