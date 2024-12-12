@@ -23,6 +23,11 @@ export class ProductService {
     return this.http.post<Product>(this.apiUrl, product);
   }
   
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  }
+
+  
   private cartItemsSubject = new BehaviorSubject<Product[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
 
