@@ -1,9 +1,5 @@
 
 
-.modal{
-  margin-top: 60px;
-}
-
 .product-container {
   font-family: 'Playfair Display', serif;
   max-width: 1200px;
@@ -49,7 +45,8 @@
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  overflow-y: auto; /* Permite desplazamiento vertical */
+  overflow-y: auto;
+  margin-bottom: auto;
 }
 
 .modal-content {
