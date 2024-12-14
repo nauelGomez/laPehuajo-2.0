@@ -10,6 +10,7 @@ import { AdminPanelComponent } from './admin-panel/admin-panel.component';
 import {  SubirProductoComponent } from './modal-subir-porducto/subir-porducto.component';
 import { EliminarProductoComponent } from './eliminar-producto/eliminar-producto.component';
 import { ActualizarProductoComponent } from './actualizar-producto/actualizar-producto.component';
+import { PagoTransporteComponent } from './pago-transporte/pago-transporte.component';
 
 
 export const AUTH_ROUTES: Routes = [
@@ -26,7 +27,8 @@ export const AUTH_ROUTES: Routes = [
     { path: 'admin-panel', component: AdminPanelComponent},
     {path: 'subir-productos', component: SubirProductoComponent},
     {path: 'eliminar-productos', component: EliminarProductoComponent},
-    {path: 'actualizar-productos', component: ActualizarProductoComponent}
+    {path: 'actualizar-productos', component: ActualizarProductoComponent},
+    {path: 'pago-transporte', component: PagoTransporteComponent}
   
 
   

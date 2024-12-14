@@ -25,12 +25,8 @@ import {RootObject } from '../../services/servicio productos/product.interface';
   
     getCartItems(): void {
       // Simula una llamada a la API que devuelve productos en el carrito
-      setTimeout(() => {
-        const mockData: (RootObject & { quantity: number })[] = [
-          
-        ];
-        this.cartItemsSubject.next(mockData);
-      }, 2000); // Simulación de tiempo de carga
+      const currentItems = this.cartItemsSubject.value;
+  this.cartItemsSubject.next([...currentItems]);
     }
   
   

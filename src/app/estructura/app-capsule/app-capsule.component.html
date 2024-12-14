@@ -129,7 +129,7 @@
 
 
   <div class="cart-footer">
-    <button mat-raised-button color="primary" (click)="checkout()">Iniciar compra</button>
+    <button mat-raised-button color="primary" [routerLink]="['pago-transporte']">Iniciar compra</button>
   </div>
 </div>
 <div class="overlay" *ngIf="isCartOpen" (click)="toggleCart()"></div>
