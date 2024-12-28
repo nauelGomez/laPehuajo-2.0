@@ -11,7 +11,7 @@ export class ProductService {
   constructor (private http: HttpClient) {}
 
   getProductsList(): Observable<RootObject[]> {
-    return this.http.get<RootObject[]>(`${this.apiUrl}?offset=0&limit=20`).pipe(
+    return this.http.get<RootObject[]>(`${this.apiUrl}?offsengt=0&limit=20`).pipe(
       map((products: RootObject[]) =>
         products.map(product => this.normalizeProductImages(product))
       )

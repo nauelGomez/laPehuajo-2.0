@@ -13,15 +13,16 @@
   }
   
   .navbar {
-    background-color: #dcbb7e;
+    background-color: transparent;
     color: white;
     display: flex;
     flex-direction: column;
     font-family: 'Playfair Display', serif;
     width: 100%;
     overflow: hidden;
-    
+    margin-bottom: -63px;
   }
+  
   
   .top-bar {
     background-color: #73302e;
@@ -106,7 +107,6 @@
   }
 
   
-  
   input[matInput] {
     font-size: 16px;
     padding: 12px 15px ;
@@ -130,6 +130,37 @@
     gap: 20px;
   }
 
+
+  .custom-search-field {
+    background-color: white; /* Fondo blanco */
+    border-radius: 25px; /* Bordes redondeados */
+    box-shadow: none; /* Sin sombra */
+    padding: 5px 15px; /* Espaciado interno */
+    width: 100%; /* Ancho ajustable */
+    max-width: 800px; /* Limita el ancho máximo */
+    max-height: 70px;
+    margin: 0 auto; /* Centra horizontalmente */
+    display: flex;
+    align-items: center;
+  }
+  
+  .custom-search-field input[matInput] {
+    border: none; /* Sin bordes */
+    outline: none; /* Quita el foco predeterminado */
+    font-size: 16px; /* Tamaño de texto ajustado */
+    padding: 5px; /* Espaciado interno */
+    width: 100%; /* Ocupa todo el ancho */
+    color: #73302e; /* Color del texto */
+    background-color: transparent; /* Fondo transparente */
+    text-align: center; /* Texto centrado */
+  }
+  
+  .custom-search-field input[matInput]::placeholder {
+    color: #b6abab; /* Color del placeholder */
+    font-style: italic; /* Placeholder en cursiva */
+  }
+  
+  
   .icons button {
     display: flex;
   flex-direction: column; 

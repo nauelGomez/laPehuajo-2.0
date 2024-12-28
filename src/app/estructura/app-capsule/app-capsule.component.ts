@@ -11,11 +11,12 @@ import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
 import { SearchService } from '../../services/servicio search/search.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import { MatInput, MatInputModule } from '@angular/material/input';
 
 @Component({
   selector: 'app-app-capsule',
   standalone: true,
-  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, CarouselProductsComponent, RouterLink],
+  imports: [MatToolbarModule, MatButtonModule, MatFormFieldModule, MatIconModule, CommonModule, FormsModule, MatInputModule, RouterLink],
   templateUrl: './app-capsule.component.html',
   styleUrl: './app-capsule.component.css',
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

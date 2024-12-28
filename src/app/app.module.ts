@@ -6,7 +6,8 @@ import { AppComponent } from './app.component';
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
 
 @NgModule({
 	declarations: [],
@@ -15,6 +16,8 @@ import { RouterModule } from '@angular/router';
 		FormsModule,
 		BrowserAnimationsModule,
 		CommonModule,
+		MatFormFieldModule,
+    MatInputModule,
 	FormsModule,
 	RouterModule.forRoot([])],
 	providers: []
