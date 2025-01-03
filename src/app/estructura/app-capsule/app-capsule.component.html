@@ -7,10 +7,9 @@
       <span [routerLink]="['']" class="brand">laPehuajo</span>
       <ion-icon name="leaf-outline"></ion-icon>
     </i>
-    <mat-form-field class="custom-search-field" appearance="outline">
+    <mat-form-field>
       <input matInput placeholder="¿Qué estás buscando?" [(ngModel)]="searchTerm" (input)="onSearch()" />
     </mat-form-field>
-    
     <div class="icons">
       <button mat-icon-button [routerLink]="['contacto-form']">
         <i>

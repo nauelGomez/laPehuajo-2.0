@@ -15,8 +15,13 @@ body { margin: 0; }
  .service-item{
     box-shadow: none !important;
  }
-
- 
+ .mat-mdc-text-field-wrapper{
+  border-radius: 25px !important;
+  height: 50px !important;
+  margin-top: 20px !important;
+  text-align: center !important;
+  width: 300px !important;
+ }
 button{
   font-family: 'Playfair Display', serif;
   background-color: #ea6834;
@@ -32,11 +37,11 @@ button{
   color: #73302e;
 }
 
+
 .p-carousel-content {
   background-color: #faf0dd;
 }
 
-  
   button.p-carousel-next,
   button.p-carousel-prev {
     position: absolute;
@@ -100,6 +105,13 @@ button{
     button.p-carousel-prev {
       display: none !important; /* Oculta completamente las flechas */
     }
+    .mat-mdc-text-field-wrapper{
+      border-radius: 25px !important;
+      height: 50px !important;
+      margin-top: 20px !important;
+      text-align: center !important;
+      width: auto !important;
+     }
   }
 
   button.p-link {
