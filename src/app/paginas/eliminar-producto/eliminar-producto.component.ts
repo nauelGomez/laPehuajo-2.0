@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
-import { RootObject } from '../../services/servicio productos/product.interface';
+import { Product } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { ProductoComponent } from '../../estructura/producto/producto.component';
 import { SearchService } from '../../services/servicio search/search.service';
@@ -13,8 +13,8 @@ import { SearchService } from '../../services/servicio search/search.service';
   styleUrls: ['./eliminar-producto.component.css']
 })
 export class EliminarProductoComponent implements OnInit {
-  products: RootObject[] = [];
-  filteredProducts: RootObject[] = [];
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   searchTerm: string = '';
 
   constructor(private productService: ProductService, private searchService: SearchService) {}
@@ -32,14 +32,16 @@ export class EliminarProductoComponent implements OnInit {
       this.applyFilters();
     });
   }
+
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) => {
-      const searchMatch = product.title.toLowerCase().includes(this.searchTerm.toLowerCase());
+      const searchMatch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
       return searchMatch;
     });
   }
+
   // Método para eliminar un producto
-  deleteProduct(id: number): void {
+  deleteProduct(id: string): void {
     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
       this.productService.deleteProduct(id).subscribe(() => {
         // Actualizamos las listas al eliminar el producto

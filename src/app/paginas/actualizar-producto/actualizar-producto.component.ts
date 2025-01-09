@@ -1,24 +1,22 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { RootObject } from '../../services/servicio productos/product.interface';
+import { Product } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { SearchService } from '../../services/servicio search/search.service';
-import { MatFormField, MatLabel } from '@angular/material/form-field';
-import { MatIcon } from '@angular/material/icon';
 
 @Component({
   selector: 'app-actualizar-producto',
   standalone: true,
-  imports: [CommonModule, FormsModule, MatFormField, MatLabel, MatIcon],
+  imports: [CommonModule, FormsModule],
   templateUrl: './actualizar-producto.component.html',
   styleUrls: ['./actualizar-producto.component.css']
 })
 export class ActualizarProductoComponent implements OnInit {
-  products: RootObject[] = [];
-  filteredProducts: RootObject[] = [];
+  products: Product[] = [];
+  filteredProducts: Product[] = [];
   searchTerm: string = '';
-  editingProduct: RootObject | null = null; // Producto que se está editando
+  editingProduct: Product | null = null; // Producto que se está editando
   successMessage: string = ''; // Mensaje de éxito
   showSuccess: boolean = false; // Controla la visibilidad del mensaje
 
@@ -44,12 +42,12 @@ export class ActualizarProductoComponent implements OnInit {
   // Filtrar productos por búsqueda
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) =>
-      product.title.toLowerCase().includes(this.searchTerm.toLowerCase())
+      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
     );
   }
 
   // Habilitar edición
-  editProduct(product: RootObject): void {
+  editProduct(product: Product): void {
     this.editingProduct = { ...product }; // Clonamos para evitar modificar directamente
   }
   
@@ -72,15 +70,16 @@ export class ActualizarProductoComponent implements OnInit {
       );
     }
   }
+
   normalizeImage(image: string): string {
     return image.replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').trim();
   }
+
   normalizeImages(): void {
     if (this.editingProduct?.images) {
       this.editingProduct.images = this.editingProduct.images.map(this.normalizeImage);
     }
   }
-  
 
   // Mostrar mensaje de éxito
   showSuccessMessage(message: string): void {

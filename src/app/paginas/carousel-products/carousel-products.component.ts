@@ -3,7 +3,7 @@ import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ProductService } from '../../services/servicio productos/product.service';
-import { RootObject } from '../../services/servicio productos/product.interface';
+import { Product } from '../../services/servicio productos/product.interface';
 import { ProductoComponent } from "../../estructura/producto/producto.component";
 
 @Component({
@@ -12,11 +12,10 @@ import { ProductoComponent } from "../../estructura/producto/producto.component"
   imports: [CarouselModule, ButtonModule, TagModule, ProductoComponent],
   providers: [ProductService],
   templateUrl: './carousel-products.component.html',
-  styleUrl: './carousel-products.component.css'
+  styleUrls: ['./carousel-products.component.css']
 })
-
 export class CarouselProductsComponent implements OnInit {
-  products: RootObject[] = [];
+  products: Product[] = [];
   currentIndex: number = 0;
   visibleProducts: number = 4; // Predeterminado para computadoras
 
@@ -59,5 +58,4 @@ export class CarouselProductsComponent implements OnInit {
       this.currentIndex--;
     }
   }
-
 }

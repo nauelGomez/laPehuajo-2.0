@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from '../../services/servicio productos/product.service';
-import { RootObject } from '../../services/servicio productos/product.interface';
+import { Product } from '../../services/servicio productos/product.interface';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
@@ -18,7 +18,7 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   ]
 })
 export class ProductoViewComponent implements OnInit {
-  product!: RootObject;
+  product!: Product;
   quantity: number = 1;
   mainImage: string = '';
   currentIndex: number = 0;
@@ -36,16 +36,17 @@ export class ProductoViewComponent implements OnInit {
     const productId = this.route.snapshot.paramMap.get('id');
     console.log('ID Capturado:', productId); // Verificar el ID en la consola
     if (productId) {
-      this.loadProduct(+productId); // Convertir a número y cargar el producto
+      this.loadProduct(productId); // Pasar el ID como string
     } else {
       console.error('No se encontró el ID en la URL');
     }
   }
 
-  // Cargar el producto usando el servicio
-  loadProduct(id: number): void {
+ 
+  
+  loadProduct(id: string): void {
     this.productService.getProductById(id).subscribe({
-      next: (data) => {
+      next: (data: Product) => {
         this.product = data;
         this.mainImage = this.product.images[0]; // Inicializar la imagen principal
       },
@@ -71,7 +72,7 @@ export class ProductoViewComponent implements OnInit {
   // Acción de agregar al carrito
   addToCart(): void {
     this.carritoService.addToCart(this.product, this.quantity);
-    console.log(`Producto agregado al carrito: ${this.product.title}, cantidad: ${this.quantity}`);
+    console.log(`Producto agregado al carrito: ${this.product.name}, cantidad: ${this.quantity}`);
   }
 
   onThumbnailClick(index: number): void {

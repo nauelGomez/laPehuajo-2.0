@@ -1,54 +1,51 @@
 <div class="info-producto">
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb">
-      <a routerLink="/">Inicio</a> >
-      <a >{{ product.category.name }}</a> >
-      <span>{{ product.title }}</span>
-    </nav>
-  
-    <div class="product-details">
-      <!-- Sección de imágenes -->
-      <div class="product-images">
-        <div class="carousel">
-          <img
-  class="main-image"
-  [src]="sanitizeAndCleanImageUrl(mainImage)"
-  [alt]="product.title"
-  [class.fade]="isAnimating"
-/>
-        </div>
-        <div class="thumbnail-container">
-          <img
-            *ngFor="let image of product.images; let i = index"
-            class="thumbnail"
-            [src]="sanitizeAndCleanImageUrl(image)"
-            [alt]="'Imagen ' + (i + 1) + ' de ' + product.title"
-            (click)="onThumbnailClick(i)"
-          />
-        </div>
+  <nav class="breadcrumb">
+    <a routerLink="/">Inicio</a>
+    <ng-container *ngIf="product.categories">
+      <a *ngFor="let category of product.categories">{{ category.name }}</a>
+    </ng-container>
+    <span>{{ product.name }}</span>
+  </nav>
+
+  <div class="product-details">
+    <div class="product-images">
+      <div class="carousel">
+        <img
+          class="main-image"
+          [src]="sanitizeAndCleanImageUrl(mainImage)"
+          [alt]="product.name"
+          [class.fade]="isAnimating"
+        />
       </div>
-  
-      <!-- Información del producto -->
-      <div class="product-info">
-        <h1>{{ product.title }}</h1>
-        <p class="price">$ {{ product.price | number: '1.0-2' }}</p>
-        <p class="discount">20% OFF COMPRANDO 6 O MÁS!</p>
-        <div class="quantity-selector">
-          <button (click)="decrementQuantity()">-</button>
-          <input
-            type="number"
-            [(ngModel)]="quantity"
-            min="1"
-            [value]="quantity"
-          />
-          <button (click)="incrementQuantity()">+</button>
-        </div>
-        <button class="add-to-cart" (click)="addToCart()">AGREGAR AL CARRITO</button>
-        <div class="description">
-          <h3>Descripción</h3>
-          <p>{{ product.description }}</p>
-        </div>
+      <div class="thumbnail-container">
+        <img
+          *ngFor="let image of product.images; let i = index"
+          class="thumbnail"
+          [src]="sanitizeAndCleanImageUrl(image)"
+          [alt]="'Imagen ' + (i + 1) + ' de ' + product.name"
+          (click)="onThumbnailClick(i)"
+        />
+      </div>
+    </div>
+
+    <div class="product-info">
+      <h1>{{ product.name }}</h1>
+      <p class="price">$ {{ product.price | number: '1.0-2' }}</p>
+      <p class="discount">20% OFF COMPRANDO 6 O MÁS!</p>
+      <div class="quantity-selector">
+        <button (click)="decrementQuantity()">-</button>
+        <input
+          type="number"
+          [(ngModel)]="quantity"
+          min="1"
+        />
+        <button (click)="incrementQuantity()">+</button>
+      </div>
+      <button class="add-to-cart" (click)="addToCart()">AGREGAR AL CARRITO</button>
+      <div class="description">
+        <h3>Descripción</h3>
+        <p>{{ product.description }}</p>
       </div>
     </div>
   </div>
-  
+</div>

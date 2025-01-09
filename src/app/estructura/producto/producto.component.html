@@ -1,13 +1,11 @@
 <div class="product-container" [routerLink]="['/producto-view', productoInfo.id]">
-    <div class="product-card" >
-        <h3>{{ productoInfo.title }}</h3>
-        <div class="image-container">
-          <img [src]="sanitizeAndCleanImageUrl(productoInfo.images[0])" alt="Product Image" />
-
-        </div>
-        <div class="price">
-        <p>Precio: ${{ productoInfo.price }}</p>
-      </div>
-      </div>
+  <div class="product-card">
+    <h3>{{ productoInfo.name }}</h3>
+    <div class="image-container">
+      <img [src]="sanitizeAndCleanImageUrl(productoInfo.images[0])" alt="Imagen del producto" />
+    </div>
+    <div class="price">
+      <p>Precio: ${{ productoInfo.price }}</p>
+    </div>
   </div>
-  
+</div>

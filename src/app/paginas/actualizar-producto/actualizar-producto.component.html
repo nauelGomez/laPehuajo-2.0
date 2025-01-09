@@ -5,8 +5,8 @@
   <div *ngIf="filteredProducts.length > 0; else noProducts">
     <div *ngFor="let product of filteredProducts" class="product-card">
       <div>
-        <img [src]="product.images[0]" alt="{{ product.title }}" class="product-image" />
-        <h2>{{ product.title }}</h2>
+        <img [src]="product.images[0]" alt="{{ product.name }}" class="product-image" />
+        <h2>{{ product.name }}</h2>
       </div>
       <button class="edit-button" (click)="editProduct(product)">Editar</button>
     </div>
@@ -15,16 +15,15 @@
   <!-- Modal de edición -->
   <div *ngIf="editingProduct" class="modal">
     <div class="modal-content">
-      <h2>Editando: {{ editingProduct.title }}</h2>
+      <h2>Editando: {{ editingProduct.name }}</h2>
       <button class="close-button" (click)="closeModal()">×</button>
 
       <!-- Formulario de edición -->
       <label>
-        Título:
-        <input type="text" [(ngModel)]="editingProduct.title" />
+        Nombre:
+        <input type="text" [(ngModel)]="editingProduct.name" />
       </label>
       <label>
-        
         <br>
         Precio:
         <input type="number" [(ngModel)]="editingProduct.price" />

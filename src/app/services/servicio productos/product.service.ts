@@ -1,68 +1,56 @@
 import { Injectable } from '@angular/core';
-import { Product, RootObject } from './product.interface';
+import { Product } from './product.interface';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../../environment/environment.component';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
-  private apiUrl = 'https://api.escuelajs.co/api/v1/products';
-  constructor (private http: HttpClient) {}
+  private apiUrl = `${environment.apiBaseUrl}/products`;
 
-  getProductsList(): Observable<RootObject[]> {
-    return this.http.get<RootObject[]>(`${this.apiUrl}?offsengt=0&limit=20`).pipe(
-      map((products: RootObject[]) =>
-        products.map(product => this.normalizeProductImages(product))
-      )
+  constructor(private http: HttpClient) {}
+
+  // Obtener lista de productos
+  getProductsList(): Observable<Product[]> {
+    return this.http.get<Product[]>(`${this.apiUrl}`).pipe(
+      map((products: Product[]) => products.map(product => this.normalizeProductImages(product)))
     );
   }
-  
-  
 
-  getProductById(id: number): Observable<RootObject> {
-    console.log('Solicitando producto con ID:', id);
-    return this.http.get<RootObject>(`https://api.escuelajs.co/api/v1/products/${id}`).pipe(
-      map((product: RootObject) => this.normalizeProductImages(product))
+  // Obtener un producto por ID
+  getProductById(id: string): Observable<Product> {
+    return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
+      map((product: Product) => this.normalizeProductImages(product))
     );
   }
-  
-  
+
+  // Crear un nuevo producto
   createProduct(product: Product): Observable<Product> {
     return this.http.post<Product>(this.apiUrl, product);
   }
-  
-  updateProduct(id: number, productData: RootObject): Observable<RootObject> {
-  // Limpia las imágenes antes de enviar el producto
-  const normalizedProduct = this.normalizeProductImages(productData);
 
-  // Transforma RootObject a Product
-  const productToSend: Product = {
-    title: normalizedProduct.title,
-    price: normalizedProduct.price,
-    description: normalizedProduct.description,
-    categoryId: normalizedProduct.category.id, // Tomamos el ID de la categoría
-    images: [...normalizedProduct.images], // Aseguramos que sea un array limpio
-  };
+  // Actualizar un producto existente
+  updateProduct(id: string, productData: Product): Observable<Product> {
+    const normalizedProduct = this.normalizeProductImages(productData);
+    return this.http.put<Product>(`${this.apiUrl}/${id}`, normalizedProduct);
+  }
 
-  // Enviar datos al servidor
-  return this.http.put<RootObject>(`${this.apiUrl}/${id}`, productToSend);
-}
-  
-  deleteProduct(id: number): Observable<void> {
+  // Eliminar un producto
+  deleteProduct(id: string): Observable<void> {
     return this.http.delete<void>(`${this.apiUrl}/${id}`);
   }
 
-  private normalizeProductImages(product: RootObject): RootObject {
+  // Normalizar las imágenes de un producto
+  private normalizeProductImages(product: Product): Product {
     if (product.images && Array.isArray(product.images)) {
-      product.images = product.images.map(image =>
-        image.replace(/^\[|\]$/g, '').replace(/^"|"$/g, '').trim()
-      );
+      product.images = product.images.map(image => image.trim());
     }
     return product;
   }
-  
-  
+
+  // Carrito de compras
   private cartItemsSubject = new BehaviorSubject<Product[]>([]);
   cartItems$ = this.cartItemsSubject.asObservable();
 
@@ -71,7 +59,7 @@ export class ProductService {
 
   addToCart(product: Product): void {
     const currentItems = this.cartItemsSubject.getValue();
-
-  // Asegúrate de que la cantidad siempre está definida
-}
+    this.cartItemsSubject.next([...currentItems, product]);
+    this.cartCountSubject.next(this.cartItemsSubject.getValue().length);
+  }
 }

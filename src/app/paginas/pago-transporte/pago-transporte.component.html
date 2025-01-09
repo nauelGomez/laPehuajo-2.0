@@ -1,145 +1,136 @@
 <div class="container">
     <!-- Columna Izquierda -->
     <div class="left-panel">
-        <!-- Campo Email (Diseño y comportamiento como la nueva imagen) -->
-        <h2 class="section-title">Datos de contacto</h2>
-        <div class="email-input">
-            <label for="email">Email:</label>
-            <input id="email" type="email" placeholder="Ingresa tu email" [(ngModel)]="email" />
+      <!-- Campo Email -->
+      <h2 class="section-title">Datos de contacto</h2>
+      <div class="email-input">
+        <label for="email">Email:</label>
+        <input id="email" type="email" placeholder="Ingresa tu email" [(ngModel)]="email" />
+      </div>
+  
+      <!-- Opciones de Entrega -->
+      <h2 class="section-title">Entrega</h2>
+      <div class="delivery-options">
+        <div class="option">
+          <input type="radio" id="home-delivery" name="delivery" (click)="openAddressForm()" />
+          <label for="home-delivery">Andreani Estándar "Envío a domicilio"</label>
+          <span class="price">$ 9.767,99</span>
         </div>
-
-        <!-- Opciones de Entrega -->
-        <h2 class="section-title">Entrega</h2>
-        <div class="delivery-options">
-            <div class="option">
-                <input type="radio" id="home-delivery" name="delivery" (click)="openAddressForm()" />
-                <label for="home-delivery">Andreani Estándar "Envío a domicilio"</label>
-                <span class="price">$ 9.767,99</span>
-            </div>
-            <div class="option">
-                <input type="radio" id="store-pickup" name="delivery" (click)="openAddressForm1()" />
-                <label for="store-pickup">Retiras en Retiro por depósito VAC LOG</label>
-                <span class="price">Gratis</span>
-            </div>
-            <div class="option">
-                <input type="radio" id="pickup-point" name="delivery" (click)="openAddressForm1()" />
-                <label for="pickup-point">Punto de retiro</label>
-                <span class="price">$ 7.507,92</span>
-            </div>
+        <div class="option">
+          <input type="radio" id="store-pickup" name="delivery" (click)="openAddressForm1()" />
+          <label for="store-pickup">Retiras en Retiro por depósito VAC LOG</label>
+          <span class="price">Gratis</span>
         </div>
-
-        <!-- Botón continuar -->
-        <button class="btn-primary">Continuar para el pago</button>
+        <div class="option">
+          <input type="radio" id="pickup-point" name="delivery" (click)="openAddressForm1()" />
+          <label for="pickup-point">Punto de retiro</label>
+          <span class="price">$ 7.507,92</span>
+        </div>
+      </div>
+  
+      <!-- Botón continuar -->
+      <button class="btn-primary">Continuar para el pago</button>
     </div>
-
+  
     <!-- Modal para el formulario de dirección -->
     <div *ngIf="showAddressForm" class="address-modal">
-        <div class="modal-content">
-            <h3>Datos del Destinatario</h3>
-            <form>
-                <label for="name">Nombre:</label>
-                <input id="name" type="text" placeholder="Ingrese su nombre" [(ngModel)]="address.name" />
-
-                <label for="lastname">Apellido:</label>
-                <input id="lastname" type="text" placeholder="Ingrese su apellido" [(ngModel)]="address.lastname" />
-
-                <label for="phone">Teléfono:</label>
-                <input id="phone" type="tel" placeholder="Ingrese su teléfono" [(ngModel)]="address.phone" />
-
-                <label for="postal-code">Código Postal:</label>
-                <input id="postal-code" type="text" placeholder="Ingrese el código postal"
-                    [(ngModel)]="address.postalCode" />
-
-                <label for="street">Calle:</label>
-                <input id="street" type="text" placeholder="Ingrese la calle" [(ngModel)]="address.street" />
-
-                <label for="number">Número:</label>
-                <input id="number" type="text" placeholder="Ingrese el número" [(ngModel)]="address.number" />
-
-                <label for="city">Ciudad:</label>
-                <input id="city" type="text" placeholder="Ingrese la ciudad" [(ngModel)]="address.city" />
-
-                <button type="button" class="btn-primary" (click)="saveAddress()">Guardar Dirección</button>
-                <button type="button" class="btn-secondary" (click)="closeAddressForm()">Cancelar</button>
-            </form>
-        </div>
+      <div class="modal-content">
+        <h3>Datos del Destinatario</h3>
+        <form>
+          <label for="name">Nombre:</label>
+          <input id="name" type="text" placeholder="Ingrese su nombre" [(ngModel)]="address.name" />
+  
+          <label for="lastname">Apellido:</label>
+          <input id="lastname" type="text" placeholder="Ingrese su apellido" [(ngModel)]="address.lastname" />
+  
+          <label for="phone">Teléfono:</label>
+          <input id="phone" type="tel" placeholder="Ingrese su teléfono" [(ngModel)]="address.phone" />
+  
+          <label for="postal-code">Código Postal:</label>
+          <input id="postal-code" type="text" placeholder="Ingrese el código postal" [(ngModel)]="address.postalCode" />
+  
+          <label for="street">Calle:</label>
+          <input id="street" type="text" placeholder="Ingrese la calle" [(ngModel)]="address.street" />
+  
+          <label for="number">Número:</label>
+          <input id="number" type="text" placeholder="Ingrese el número" [(ngModel)]="address.number" />
+  
+          <label for="city">Ciudad:</label>
+          <input id="city" type="text" placeholder="Ingrese la ciudad" [(ngModel)]="address.city" />
+  
+          <button type="button" class="btn-primary" (click)="saveAddress()">Guardar Dirección</button>
+          <button type="button" class="btn-secondary" (click)="closeAddressForm()">Cancelar</button>
+        </form>
+      </div>
     </div>
-
+  
     <div *ngIf="showAddressForm1" class="address-modal">
-        <div class="modal-content">
-            <h3>Datos del Destinatario</h3>
-            <form>
-                <label for="name">Nombre:</label>
-                <input id="name" type="text" placeholder="Ingrese su nombre" [(ngModel)]="address.name" />
-
-                <label for="lastname">Apellido:</label>
-                <input id="lastname" type="text" placeholder="Ingrese su apellido" [(ngModel)]="address.lastname" />
-
-                <label for="phone">Teléfono:</label>
-                <input id="phone" type="tel" placeholder="Ingrese su teléfono" [(ngModel)]="address.phone" />
-
-                <label for="postal-code">Código Postal:</label>
-                <input id="postal-code" type="text" placeholder="Ingrese el código postal"
-                    [(ngModel)]="address.postalCode" />
-
-
-                <button type="button" class="btn-primary" (click)="saveAddress1()">Guardar Dirección</button>
-                <button type="button" class="btn-secondary" (click)="closeAddressForm1()">Cancelar</button>
-            </form>
-        </div>
+      <div class="modal-content">
+        <h3>Datos del Destinatario</h3>
+        <form>
+          <label for="name">Nombre:</label>
+          <input id="name" type="text" placeholder="Ingrese su nombre" [(ngModel)]="address.name" />
+  
+          <label for="lastname">Apellido:</label>
+          <input id="lastname" type="text" placeholder="Ingrese su apellido" [(ngModel)]="address.lastname" />
+  
+          <label for="phone">Teléfono:</label>
+          <input id="phone" type="tel" placeholder="Ingrese su teléfono" [(ngModel)]="address.phone" />
+  
+          <label for="postal-code">Código Postal:</label>
+          <input id="postal-code" type="text" placeholder="Ingrese el código postal" [(ngModel)]="address.postalCode" />
+  
+          <button type="button" class="btn-primary" (click)="saveAddress1()">Guardar Dirección</button>
+          <button type="button" class="btn-secondary" (click)="closeAddressForm1()">Cancelar</button>
+        </form>
+      </div>
     </div>
-
-    <!-- Columna Derecha -->
-    <!-- Columna Derecha -->
+  
     <!-- Columna Derecha -->
     <div class="right-panel">
-        <!-- Tabla de Productos -->
-        <table class="cart-table">
-            <thead>
-                <tr>
-                    <th>Producto</th>
-                    <th>Precio</th>
-                    <th>cantidad</th>
-                    <th>Subtotal</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr *ngFor="let item of cartItems">
-                    <td class="product-details">
-                        <img [src]="sanitizeAndCleanImageUrl(item.images[0])" [alt]="item.title"
-                            class="product-image" />
-                        <div>
-                            <p class="product-title">{{ item.title }}</p>
-                            <p class="product-category">Categoría: {{ item.category.name }}</p>
-                        </div>
-                    </td>
-                    <td>{{ item.price }}</td>
-                    <td><span class="quantity-number">{{ item.quantity }}</span></td>
-                    <td>{{ (item.price * item.quantity)}}</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <!-- Resumen de Costos -->
-        <div class="cart-summary">
-            <div class="cart-summary-row">
-                <span>Subtotal:</span>
-                <span>{{ calculateSubtotal() }}</span>
-            </div>
-            <div class="cart-summary-row">
-                <span>Costo de envío:</span>
-                <span>{{ shippingCost }}</span>
-            </div>
-            <div class="cart-summary-total">
-                <span>Total:</span>
-                <span>{{ calculateTotal() }}</span>
-            </div>
+      <!-- Tabla de Productos -->
+      <table class="cart-table">
+        <thead>
+          <tr>
+            <th>Producto</th>
+            <th>Precio</th>
+            <th>cantidad</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of cartItems">
+            <td class="product-details">
+              <img [src]="sanitizeAndCleanImageUrl(item.images[0])" [alt]="item.name" class="product-image" />
+              <div>
+                <p class="product-title">{{ item.name }}</p>
+                <p class="product-category">Categoría: {{ getCategoryNames(item.categories) }}</p>
+              </div>
+            </td>
+            <td>{{ item.price }}</td>
+            <td><span class="quantity-number">{{ item.quantity }}</span></td>
+            <td>{{ (item.price * item.quantity) }}</td>
+          </tr>
+        </tbody>
+      </table>
+  
+      <!-- Resumen de Costos -->
+      <div class="cart-summary">
+        <div class="cart-summary-row">
+          <span>Subtotal:</span>
+          <span>{{ calculateSubtotal() }}</span>
         </div>
-
-        <!-- Cupón de Descuento -->
-        <a class="discount-link" href="#">Agregar cupón de descuento</a>
+        <div class="cart-summary-row">
+          <span>Costo de envío:</span>
+          <span>{{ shippingCost }}</span>
+        </div>
+        <div class="cart-summary-total">
+          <span>Total:</span>
+          <span>{{ calculateTotal() }}</span>
+        </div>
+      </div>
+  
+      <!-- Cupón de Descuento -->
+      <a class="discount-link" href="#">Agregar cupón de descuento</a>
     </div>
-
-
-
-</div>
+  </div>

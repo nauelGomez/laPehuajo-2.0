@@ -3,13 +3,18 @@
     <h2>Crear Producto</h2>
     <form (ngSubmit)="onSubmit()">
       <div class="form-group">
-        <label for="title">Título</label>
-        <input id="title" type="text" [(ngModel)]="product.title" name="title" required />
+        <label for="name">Nombre</label>
+        <input id="name" type="text" [(ngModel)]="product.name" name="name" required />
       </div>
 
       <div class="form-group">
         <label for="price">Precio</label>
         <input id="price" type="number" [(ngModel)]="product.price" name="price" required />
+      </div>
+
+      <div class="form-group">
+        <label for="promotionalPrice">Precio Promocional</label>
+        <input id="promotionalPrice" type="number" [(ngModel)]="product.promotionalPrice" name="promotionalPrice" />
       </div>
 
       <div class="form-group">
@@ -23,8 +28,13 @@
       </div>
 
       <div class="form-group">
-        <label for="categoryId">ID de Categoría</label>
-        <input id="categoryId" type="number" [(ngModel)]="product.categoryId" name="categoryId" required />
+        <label for="stock">Stock</label>
+        <input id="stock" type="number" [(ngModel)]="product.stock" name="stock" required />
+      </div>
+
+      <div class="form-group">
+        <label for="categoriesIds">Categorías</label>
+        <input id="categoriesIds" type="text" [(ngModel)]="product.categoriesIds" name="categoriesIds" placeholder="IDs de las categorías, separadas por comas" />
       </div>
 
       <div class="form-group">

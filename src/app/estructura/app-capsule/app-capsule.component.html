@@ -69,14 +69,17 @@
             <td class="product-details">
               <img
                 [src]="sanitizeAndCleanImageUrl(item.images[0])"
-                [alt]="item.title"
+                [alt]="item.name"
                 class="product-image"
               />
               <div>
-                <p class="product-title">{{ item.title }}</p>
-                <p class="product-category">Categoría: {{ item.category.name }}</p>
+                <p class="product-title">{{ item.name }}</p>
+                <p class="product-category">
+                  Categoría: {{ getCategoryNames(item.categories) }}
+                </p>
               </div>
             </td>
+            
             <td>{{ item.price | currency }}</td>
             <td class="quantity-cell">
               <button mat-icon-button class="arrow-button" (click)="decreaseQuantity(item)">
