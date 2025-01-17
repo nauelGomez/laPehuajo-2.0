@@ -10,7 +10,7 @@ import { SearchService } from '../../services/servicio search/search.service';
   standalone: true,
   imports: [CommonModule, FormsModule],
   templateUrl: './actualizar-producto.component.html',
-  styleUrls: ['./actualizar-producto.component.css']
+  styleUrls: ['./actualizar-producto.component.css'],
 })
 export class ActualizarProductoComponent implements OnInit {
   products: Product[] = [];
@@ -25,18 +25,21 @@ export class ActualizarProductoComponent implements OnInit {
     private searchService: SearchService
   ) {}
 
-  ngOnInit(): void {
-    // Cargar productos
-    this.productService.getProductsList().subscribe((data) => {
+  async ngOnInit(): Promise<void> {
+    try {
+      // Cargar productos
+      const data = await this.productService.getProductsList();
       this.products = data;
       this.filteredProducts = data;
-    });
 
-    // Escuchar el término de búsqueda desde el servicio
-    this.searchService.searchTerm$.subscribe((term) => {
-      this.searchTerm = term;
-      this.applyFilters();
-    });
+      // Escuchar el término de búsqueda desde el servicio
+      this.searchService.searchTerm$.subscribe((term) => {
+        this.searchTerm = term;
+        this.applyFilters();
+      });
+    } catch (error) {
+      console.error('Error al cargar los productos:', error);
+    }
   }
 
   // Filtrar productos por búsqueda
@@ -50,24 +53,27 @@ export class ActualizarProductoComponent implements OnInit {
   editProduct(product: Product): void {
     this.editingProduct = { ...product }; // Clonamos para evitar modificar directamente
   }
-  
+
   // Guardar cambios
-  saveChanges(): void {
+  async saveChanges(): Promise<void> {
     if (this.editingProduct) {
-      this.normalizeImages(); // Normalizamos las URLs de las imágenes
-      this.productService.updateProduct(this.editingProduct.id, this.editingProduct).subscribe(
-        () => {
-          // Recargar la lista de productos sin recargar toda la página
-          this.productService.getProductsList().subscribe((data) => {
-            this.products = data;
-            this.filteredProducts = data;
-            this.closeModal();
-          });
-        },
-        (error) => {
-          console.error('Error al actualizar el producto:', error);
-        }
-      );
+      try {
+        this.normalizeImages(); // Normalizamos las URLs de las imágenes
+        await this.productService.updateProduct(
+          this.editingProduct.id,
+          this.editingProduct
+        );
+
+        // Recargar la lista de productos sin recargar toda la página
+        const data = await this.productService.getProductsList();
+        this.products = data;
+        this.filteredProducts = data;
+
+        this.closeModal();
+        this.showSuccessMessage('Producto actualizado con éxito.');
+      } catch (error) {
+        console.error('Error al actualizar el producto:', error);
+      }
     }
   }
 

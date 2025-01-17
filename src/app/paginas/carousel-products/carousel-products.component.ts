@@ -1,4 +1,4 @@
-import { Component, EventEmitter, HostListener, Input, OnInit, Output } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
@@ -12,7 +12,7 @@ import { ProductoComponent } from "../../estructura/producto/producto.component"
   imports: [CarouselModule, ButtonModule, TagModule, ProductoComponent],
   providers: [ProductService],
   templateUrl: './carousel-products.component.html',
-  styleUrls: ['./carousel-products.component.css']
+  styleUrls: ['./carousel-products.component.css'],
 })
 export class CarouselProductsComponent implements OnInit {
   products: Product[] = [];
@@ -21,11 +21,14 @@ export class CarouselProductsComponent implements OnInit {
 
   constructor(private service: ProductService) {}
 
-  ngOnInit(): void {
-    this.service.getProductsList().subscribe((data) => {
+  async ngOnInit(): Promise<void> {
+    try {
+      const data = await this.service.getProductsList(); // Uso de Axios con Promesas
       console.log('Datos recibidos de la API:', data);
       this.products = data;
-    });
+    } catch (error) {
+      console.error('Error al obtener la lista de productos:', error);
+    }
 
     this.adjustVisibleProducts(); // Ajusta el número inicial de productos
   }

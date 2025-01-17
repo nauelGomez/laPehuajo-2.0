@@ -31,17 +31,17 @@ export class SubirProductoComponent {
 
   constructor(private router: Router, private productService: ProductService) {}
 
-  onSubmit(): void {
-    this.productService.createProduct(this.product).subscribe(
-      () => {
-        console.log('Producto creado con éxito:', this.product);
-        alert('Producto creado con éxito');
-        this.closeTab();
-      },
-      (error) => {
-        console.error('Error al crear el producto:', error);
-      }
-    );
+  async onSubmit(): Promise<void> {
+    console.log('Datos del producto a enviar:', this.product);
+    try {
+      const response = await this.productService.createProduct(this.product);
+      console.log('Producto creado con éxito:', response);
+      alert('Producto creado con éxito');
+      this.closeTab();
+    } catch (error) {
+      console.error('Error al crear el producto:', error);
+      alert('Hubo un error al crear el producto. Revisa la consola para más detalles.');
+    }
   }
 
   closeTab(): void {

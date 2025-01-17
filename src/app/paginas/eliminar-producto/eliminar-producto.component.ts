@@ -10,7 +10,7 @@ import { SearchService } from '../../services/servicio search/search.service';
   standalone: true,
   imports: [CommonModule, ProductoComponent],
   templateUrl: './eliminar-producto.component.html',
-  styleUrls: ['./eliminar-producto.component.css']
+  styleUrls: ['./eliminar-producto.component.css'],
 })
 export class EliminarProductoComponent implements OnInit {
   products: Product[] = [];
@@ -19,18 +19,21 @@ export class EliminarProductoComponent implements OnInit {
 
   constructor(private productService: ProductService, private searchService: SearchService) {}
 
-  ngOnInit(): void {
-    // Cargar productos desde el servicio
-    this.productService.getProductsList().subscribe((data) => {
+  async ngOnInit(): Promise<void> {
+    try {
+      // Cargar productos desde el servicio
+      const data = await this.productService.getProductsList();
       this.products = data;
       this.filteredProducts = data;
-    });
 
-    // Escuchar los cambios en el término de búsqueda
-    this.searchService.searchTerm$.subscribe((term) => {
-      this.searchTerm = term;
-      this.applyFilters();
-    });
+      // Escuchar los cambios en el término de búsqueda
+      this.searchService.searchTerm$.subscribe((term) => {
+        this.searchTerm = term;
+        this.applyFilters();
+      });
+    } catch (error) {
+      console.error('Error al cargar la lista de productos:', error);
+    }
   }
 
   applyFilters(): void {
@@ -41,13 +44,18 @@ export class EliminarProductoComponent implements OnInit {
   }
 
   // Método para eliminar un producto
-  deleteProduct(id: string): void {
+  async deleteProduct(id: string): Promise<void> {
     if (confirm('¿Estás seguro de que quieres eliminar este producto?')) {
-      this.productService.deleteProduct(id).subscribe(() => {
+      try {
+        await this.productService.deleteProduct(id);
         // Actualizamos las listas al eliminar el producto
         this.products = this.products.filter(product => product.id !== id);
         this.filteredProducts = this.filteredProducts.filter(product => product.id !== id);
-      });
+        alert('Producto eliminado con éxito.');
+      } catch (error) {
+        console.error('Error al eliminar el producto:', error);
+        alert('Hubo un error al eliminar el producto.');
+      }
     }
   }
 }

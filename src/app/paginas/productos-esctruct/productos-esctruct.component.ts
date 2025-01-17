@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
@@ -11,33 +11,35 @@ import { SearchService } from '../../services/servicio search/search.service';
   standalone: true,
   imports: [CommonModule, FormsModule, ProductoComponent],
   templateUrl: './productos-esctruct.component.html',
-  styleUrl: './productos-esctruct.component.css'
+  styleUrls: ['./productos-esctruct.component.css'],
 })
-export class ProductosEsctructComponent {
-
-  
+export class ProductosEsctructComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTerm: string = '';
 
-  priceRange: { min: number, max: number } = { min: 0, max: 10000 };
+  priceRange: { min: number; max: number } = { min: 0, max: 10000 };
   selectedCategory: string = '';
 
   categories: string[] = ['Mieles', 'Pastas', 'Frutos Secos'];
 
   constructor(private service: ProductService, private searchService: SearchService) {}
 
-  ngOnInit(): void {
-    this.service.getProductsList().subscribe((data: Product[]) => {
+  async ngOnInit(): Promise<void> {
+    try {
+      const data: Product[] = await this.service.getProductsList();
       console.log('Datos recibidos de la API:', data);
       this.products = data;
       this.filteredProducts = [...data];
-    });
 
-    this.searchService.searchTerm$.subscribe((term) => {
-      this.searchTerm = term;
-      this.applyFilters();
-    });
+      // Escuchar los cambios en el término de búsqueda
+      this.searchService.searchTerm$.subscribe((term) => {
+        this.searchTerm = term;
+        this.applyFilters();
+      });
+    } catch (error) {
+      console.error('Error al cargar los productos:', error);
+    }
   }
 
   // Filtrar por precio, categoría y búsqueda

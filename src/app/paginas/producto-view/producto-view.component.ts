@@ -14,8 +14,8 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./producto-view.component.css'],
   imports: [
     CommonModule, // Necesario para directivas básicas como *ngIf y *ngFor
-    FormsModule   // Agregar FormsModule para habilitar [(ngModel)]
-  ]
+    FormsModule, // Agregar FormsModule para habilitar [(ngModel)]
+  ],
 })
 export class ProductoViewComponent implements OnInit {
   product!: Product;
@@ -42,17 +42,16 @@ export class ProductoViewComponent implements OnInit {
     }
   }
 
- 
-  
-  loadProduct(id: string): void {
-    this.productService.getProductById(id).subscribe({
-      next: (data: Product) => {
-        this.product = data;
-        this.mainImage = this.product.images[0]; // Inicializar la imagen principal
-      },
-      error: (err) => console.error('Error al obtener el producto:', err),
-    });
+  async loadProduct(id: string): Promise<void> {
+    try {
+      const data: Product = await this.productService.getProductById(id); // Cambiado a método basado en Promesas
+      this.product = data;
+      this.mainImage = this.product.images[0]; // Inicializar la imagen principal
+    } catch (err) {
+      console.error('Error al obtener el producto:', err);
+    }
   }
+
   changeMainImage(image: string): void {
     this.mainImage = image;
   }
@@ -85,14 +84,15 @@ export class ProductoViewComponent implements OnInit {
       }, 300); // Tiempo igual al de la animación CSS
     }
   }
+
   onAnimationEnd(): void {
     this.isAnimating = false; // Detenemos la animación al finalizar
   }
 
   sanitizeImageUrl(url: string): SafeUrl {
     return this.sanitizer.bypassSecurityTrustUrl(url);
-
   }
+
   sanitizeAndCleanImageUrl(url: string): SafeUrl {
     if (url.startsWith('[') && url.endsWith(']')) {
       url = url.slice(1, -1); // Elimina corchetes
@@ -101,6 +101,4 @@ export class ProductoViewComponent implements OnInit {
     url = url.replace(/^"|"$/g, ''); // Elimina comillas al inicio y al final
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
-  
-  
 }

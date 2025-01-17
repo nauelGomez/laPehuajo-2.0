@@ -1,51 +1,58 @@
 import { Injectable } from '@angular/core';
-import { Product } from './product.interface';
-import { BehaviorSubject, map, Observable } from 'rxjs';
-import { HttpClient } from '@angular/common/http';
+import axios, { AxiosInstance } from 'axios';
+import { BehaviorSubject } from 'rxjs';
 import { environment } from '../../../environment/environment.component';
+import { Product } from './product.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ProductService {
-  private apiUrl = `${environment.apiBaseUrl}/products`;
+  private apiUrl = `${environment.apiBaseUrl}/products`; // Correcto ahora
+  private axiosInstance: AxiosInstance;
 
-  constructor(private http: HttpClient) {}
-
-  // Obtener lista de productos
-  getProductsList(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${this.apiUrl}`).pipe(
-      map((products: Product[]) => products.map(product => this.normalizeProductImages(product)))
-    );
+  constructor() {
+    // Configuración de Axios
+    this.axiosInstance = axios.create({
+      baseURL: this.apiUrl,
+      timeout: 10000, // Opcional: tiempo de espera
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
   }
 
-  // Obtener un producto por ID
-  getProductById(id: string): Observable<Product> {
-    return this.http.get<Product>(`${this.apiUrl}/${id}`).pipe(
-      map((product: Product) => this.normalizeProductImages(product))
-    );
+  // Métodos del servicio
+  async getProductsList(): Promise<Product[]> {
+    const response = await this.axiosInstance.get<Product[]>('');
+    return response.data;
   }
 
-  // Crear un nuevo producto
-  createProduct(product: Product): Observable<Product> {
-    return this.http.post<Product>(this.apiUrl, product);
+  async getProductById(id: string): Promise<Product> {
+    const response = await this.axiosInstance.get<Product>(`/${id}`);
+    return response.data;
   }
 
-  // Actualizar un producto existente
-  updateProduct(id: string, productData: Product): Observable<Product> {
-    const normalizedProduct = this.normalizeProductImages(productData);
-    return this.http.put<Product>(`${this.apiUrl}/${id}`, normalizedProduct);
+  async createProduct(product: Product): Promise<Product> {
+    const response = await this.axiosInstance.post<Product>('', product);
+    return response.data;
   }
 
-  // Eliminar un producto
-  deleteProduct(id: string): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+  async updateProduct(id: string, productData: Product): Promise<Product> {
+    const response = await this.axiosInstance.put<Product>(`/${id}`, productData);
+    return response.data;
+  }
+
+  async deleteProduct(id: string): Promise<void> {
+    await this.axiosInstance.delete(`/${id}`);
   }
 
   // Normalizar las imágenes de un producto
   private normalizeProductImages(product: Product): Product {
     if (product.images && Array.isArray(product.images)) {
-      product.images = product.images.map(image => image.trim());
+      product.images = product.images
+        .map((image) => image.trim()) // Quitar espacios en blanco
+        .filter((image) => image.length > 0); // Filtrar cadenas vacías
     }
     return product;
   }
