@@ -1,10 +1,11 @@
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, PLATFORM_ID, OnInit } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { CarouselModule } from 'primeng/carousel';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { Product } from '../../services/servicio productos/product.interface';
-import { ProductoComponent } from "../../estructura/producto/producto.component";
+import { ProductoComponent } from '../../estructura/producto/producto.component';
 
 @Component({
   selector: 'app-carousel-products',
@@ -19,11 +20,14 @@ export class CarouselProductsComponent implements OnInit {
   currentIndex: number = 0;
   visibleProducts: number = 4; // Predeterminado para computadoras
 
-  constructor(private service: ProductService) {}
+  constructor(
+    private service: ProductService,
+    @Inject(PLATFORM_ID) private platformId: Object // Inyecta PLATFORM_ID
+  ) {}
 
   async ngOnInit(): Promise<void> {
     try {
-      const data = await this.service.getProductsList(); // Uso de Axios con Promesas
+      const data = await this.service.getProductsList(); // Uso de Promesas con async/await
       console.log('Datos recibidos de la API:', data);
       this.products = data;
     } catch (error) {
@@ -33,16 +37,20 @@ export class CarouselProductsComponent implements OnInit {
     this.adjustVisibleProducts(); // Ajusta el número inicial de productos
   }
 
-  // Detecta el cambio de tamaño de la ventana
+  // Detecta el cambio de tamaño de la ventana solo en el navegador
   @HostListener('window:resize', [])
   onResize(): void {
-    this.adjustVisibleProducts();
+    if (isPlatformBrowser(this.platformId)) {
+      this.adjustVisibleProducts();
+    }
   }
 
   // Ajusta el número de productos visibles según el ancho de la ventana
   private adjustVisibleProducts(): void {
-    const screenWidth = window.innerWidth;
-    this.visibleProducts = screenWidth < 768 ? 1 : 4; // 1 producto en móviles, 4 en computadoras
+    if (isPlatformBrowser(this.platformId)) {
+      const screenWidth = window.innerWidth;
+      this.visibleProducts = screenWidth < 768 ? 1 : 4; // 1 producto en móviles, 4 en computadoras
+    }
   }
 
   // Calcula el desplazamiento del carrusel
