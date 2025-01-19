@@ -7,9 +7,6 @@
       <span [routerLink]="['']" class="brand">laPehuajo</span>
       <ion-icon name="leaf-outline"></ion-icon>
     </i>
-    <mat-form-field>
-      <input matInput placeholder="¿Qué estás buscando?" [(ngModel)]="searchTerm" (input)="onSearch()" />
-    </mat-form-field>
     <div class="icons">
       <button mat-icon-button [routerLink]="['contacto-form']">
         <i>
@@ -128,8 +125,12 @@
 
 
   <div class="cart-footer">
-    <button mat-raised-button color="primary" [routerLink]="['pago-transporte']">Iniciar compra</button>
+    <button mat-raised-button color="primary" class="whatsapp-button" (click)="sendToWhatsApp()">
+      <ion-icon name="logo-whatsapp"></ion-icon>
+        generar pedido
+    </button>
   </div>
+  
 </div>
 <div class="overlay" *ngIf="isCartOpen" (click)="toggleCart()"></div>
 

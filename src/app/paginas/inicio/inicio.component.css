@@ -18,7 +18,7 @@
       overflow-x: scroll; /* Solo permite el desplazamiento horizontal */
     overflow-y: hidden; 
       scroll-snap-type: x mandatory;
-      margin-top: 58px;
+      margin-top: 48px;
   }
   
   .slider img{

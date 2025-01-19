@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 import { CarritoService } from '../../services/servicio carrito/carrito.service';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import { MatInputModule } from '@angular/material/input';
+import { SearchService } from '../../services/servicio search/search.service';
 
 @Component({
   selector: 'app-app-capsule',
@@ -33,7 +34,8 @@ export class AppCapsuleComponent implements OnInit {
   constructor(
     private renderer: Renderer2,
     private carritoService: CarritoService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private searchService: SearchService
   ) {}
 
   ngOnInit(): void {
@@ -45,7 +47,27 @@ export class AppCapsuleComponent implements OnInit {
     });
     this.carritoService.getCartItems();
   }
-
+  sendToWhatsApp(): void {
+    if (this.cartItems.length === 0) {
+      alert('El carrito está vacío. Agrega productos antes de enviar el pedido.');
+      return;
+    }
+  
+    const phoneNumber = '1234567890'; // Cambia este número por el de tu negocio.
+    const encodedProducts = this.cartItems
+      .map(
+        (item) =>
+          `- ${item.name} (x${item.quantity}): ${item.price * item.quantity} ARS`
+      )
+      .join('%0A'); // %0A es el código para un salto de línea en la URL.
+  
+    const total = this.calculateTotal();
+    const message = `¡Hola! Quiero hacer un pedido:%0A%0A${encodedProducts}%0A%0A*Total (sin envío): ${total} ARS*`;
+  
+    const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
+    window.open(whatsappUrl, '_blank');
+  }
+  
   toggleCart(): void {
     this.isCartOpen = !this.isCartOpen;
   }
@@ -60,13 +82,7 @@ export class AppCapsuleComponent implements OnInit {
     return categories.map(category => category.name).join(', ');
   }
   onSearch(): void {
-    if (!this.searchTerm) {
-      this.filteredProducts = this.products;
-    } else {
-      this.filteredProducts = this.products.filter(product =>
-        product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-      );
-    }
+    this.searchService.setSearchTerm(this.searchTerm);
   }
 
   sanitizeImageUrl(url: string | null | undefined): SafeUrl {
@@ -147,4 +163,5 @@ export class AppCapsuleComponent implements OnInit {
     url = url.replace(/^"|"$/g, ''); // Elimina comillas al inicio y al final
     return this.sanitizer.bypassSecurityTrustUrl(url);
   }
+  
 }

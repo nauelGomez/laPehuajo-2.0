@@ -16,6 +16,7 @@ export class ActualizarProductoComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTerm: string = '';
+  priceRange = { min: 0, max: Infinity }; // Rango de precios
   editingProduct: Product | null = null; // Producto que se está editando
   successMessage: string = ''; // Mensaje de éxito
   showSuccess: boolean = false; // Controla la visibilidad del mensaje
@@ -42,11 +43,17 @@ export class ActualizarProductoComponent implements OnInit {
     }
   }
 
-  // Filtrar productos por búsqueda
+  // Filtrar productos por búsqueda y rango de precios
   applyFilters(): void {
-    this.filteredProducts = this.products.filter((product) =>
-      product.name.toLowerCase().includes(this.searchTerm.toLowerCase())
-    );
+    this.filteredProducts = this.products.filter((product) => {
+      const searchMatch = product.name
+        .toLowerCase()
+        .includes(this.searchTerm.toLowerCase());
+      const priceMatch =
+        product.price >= (this.priceRange.min || 0) &&
+        product.price <= (this.priceRange.max || Infinity);
+      return searchMatch && priceMatch;
+    });
   }
 
   // Habilitar edición

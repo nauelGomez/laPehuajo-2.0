@@ -45,23 +45,57 @@ body, html {
 
 .main-bar {
   position: fixed;
-  top: 30px;
+  top: 33px;
   left: 0;
   width: 100%;
   z-index: 999;
   display: flex;
   align-items: center;
-  justify-content: space-evenly;
-  max-width: 120%;
-  height: 70px;
-  padding: 10px 20px 10px -2px;
+  justify-content: space-between;
+  padding: 5px 9px 2px; /* Ajuste de padding para móviles */
   background-color: #dcbb7e;
   transition: top 0.3s, height 0.3s;
+  height: 60px; /* Altura reducida para móviles */
 }
 
 .main-bar.small {
   top: 0;
-  height: 60px;
+  height: 45px; /* Altura aún más reducida en estado pequeño */
+}
+
+.icons {
+  display: flex;
+  align-items: center;
+  gap: 15px; /* Espaciado entre íconos */
+  margin: 0 10px; /* Márgenes laterales para los íconos */
+}
+
+.icons button {
+  flex-shrink: 0; /* Evita que los íconos se reduzcan */
+}
+
+.icons ion-icon {
+  font-size: 30px; /* Ajusta el tamaño del ícono */
+  color: #73302e;
+}
+
+@media (max-width: 480px) {
+  .main-bar {
+    padding: 5px; /* Menos espacio horizontal */
+    height: 40px; /* Altura reducida */
+  }
+
+  .brand {
+    font-size: 14px; /* Texto de la marca más pequeño */
+  }
+
+  .icons {
+    gap: 5px; /* Espaciado más ajustado entre íconos */
+  }
+
+  .icons ion-icon {
+    font-size: 24px; /* Tamaño del ícono más pequeño */
+  }
 }
 
 .menu-items {
@@ -73,16 +107,16 @@ body, html {
   color: white;
   padding: 5px 0;
   position: fixed;
-  top: 94px;
+  top: 84px;
   left: 0;
   width: 100%;
   z-index: 998;
   background-color: #dcbb7ee3;
-  transition: top 0.2s, height 0.3s;
+  transition: top 0.3s, height 0.3s;
 }
 
 .menu-items.small {
-  top: 60px;
+  top: 45px;
   height: 35px;
 }
 
@@ -162,6 +196,7 @@ input[matInput] {
   align-items: center;
   color: white;
   text-decoration: none;
+  margin-left: 9px;
 }
 
 .icons button.small-button {
@@ -272,17 +307,40 @@ input[matInput] {
 @media (max-width: 768px) {
   .main-bar {
     flex-direction: row;
-    align-items: center;
-    justify-content: space-evenly;
-  }
-
-  .menu-items {
-    margin-top: -2px;
+    justify-content: space-between; /* Distribuye elementos a los lados */
+    padding: 5px 15px; /* Reduce el padding en móviles */
+    height: 45px; /* Altura más reducida en móviles */
   }
 
   .brand {
-    font-size: 12px;
+    font-size: 16px; /* Reduce el tamaño del texto de la marca */
+    margin-left: 10px;
   }
+
+  .icons {
+    gap: 10px; /* Reduce el espacio entre íconos */
+    margin: 0;
+  }
+
+  .icons ion-icon {
+    font-size: 26px; /* Ajusta el tamaño del ícono para móviles */
+  }
+
+  /* Ajuste del tamaño del botón */
+  .icons button {
+    padding: 0;
+    width: 40px; /* Botones más pequeños */
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .menu-items {
+    margin-top: -12px;
+  }
+
+ 
 
   .search-field {
     margin-top: -5px;
@@ -291,11 +349,6 @@ input[matInput] {
     flex-grow: 1;
   }
 
-  .icons ion-icon {
-    font-size: 26px;
-    margin: -5px 0px -15px 0px;
-    margin-left: 20px;
-  }
 
   .icons {
     gap: 1px;

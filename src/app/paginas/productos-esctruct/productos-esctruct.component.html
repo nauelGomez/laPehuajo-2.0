@@ -1,19 +1,34 @@
 <div class="filters">
-  <div class="filter-category">
-    <button [ngClass]="{ active: selectedCategory === 'Mieles' }" (click)="selectCategory('Mieles')">MIELES</button>
-    <button [ngClass]="{ active: selectedCategory === 'Pastas' }" (click)="selectCategory('Pastas')">PASTAS</button>
-    <button [ngClass]="{ active: selectedCategory === 'Frutos Secos' }" (click)="selectCategory('Frutos Secos')">FRUTOSECOS</button>
-    <button [ngClass]="{ active: selectedCategory === '' }" (click)="selectCategory('')">TODAS</button>
+  <!-- Barra de búsqueda -->
+  <div class="filter-search">
+    <input
+      type="text"
+      [(ngModel)]="searchTerm"
+      placeholder="Buscar productos..."
+      (input)="applyFilters()"
+    />
   </div>
 
+  <!-- Filtro de precios -->
   <div class="filter-price">
     <a>PRECIO $:</a>
-    <input type="number" [(ngModel)]="priceRange.min" placeholder="Desde" (change)="applyFilters()" />
+    <input
+      type="number"
+      [(ngModel)]="priceRange.min"
+      placeholder="Desde"
+      (change)="applyFilters()"
+    />
     <span></span>
-    <input type="number" [(ngModel)]="priceRange.max" placeholder="Hasta" (change)="applyFilters()" />
+    <input
+      type="number"
+      [(ngModel)]="priceRange.max"
+      placeholder="Hasta"
+      (change)="applyFilters()"
+    />
   </div>
 </div>
 
+<!-- Lista de productos -->
 <div class="product-container">
   <div *ngFor="let product of filteredProducts">
     <app-producto [productoInfo]="product"></app-producto>

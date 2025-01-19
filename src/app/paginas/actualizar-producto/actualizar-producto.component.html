@@ -1,6 +1,35 @@
 <div class="product-container">
   <h1>Actualizar Productos</h1>
 
+  <!-- Barra de búsqueda y filtro de precios -->
+  <div class="filters">
+    <div class="filter-search">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar productos..."
+        (input)="applyFilters()"
+      />
+    </div>
+
+    <div class="filter-price">
+      <a>PRECIO $:</a>
+      <input
+        type="number"
+        [(ngModel)]="priceRange.min"
+        placeholder="Desde"
+        (change)="applyFilters()"
+      />
+      <span></span>
+      <input
+        type="number"
+        [(ngModel)]="priceRange.max"
+        placeholder="Hasta"
+        (change)="applyFilters()"
+      />
+    </div>
+  </div>
+
   <!-- Lista de productos -->
   <div *ngIf="filteredProducts.length > 0; else noProducts">
     <div *ngFor="let product of filteredProducts" class="product-card">
@@ -24,13 +53,10 @@
         <input type="text" [(ngModel)]="editingProduct.name" />
       </label>
       <label>
-        <br>
         Precio:
         <input type="number" [(ngModel)]="editingProduct.price" />
       </label>
       <label>
-        <br>
-        <br>
         Descripción:
         <textarea [(ngModel)]="editingProduct.description"></textarea>
       </label>
@@ -42,10 +68,10 @@
           <input [(ngModel)]="editingProduct.images[i]" placeholder="URL de la imagen" />
           <button (click)="removeImage(i)">Eliminar</button>
         </div>
-        <button (click)="addImage()">Agregar Imagen</button><button (click)="saveChanges()">Guardar Cambios</button>
+        <button (click)="addImage()">Agregar Imagen</button>
       </div>
 
-      
+      <button (click)="saveChanges()">Guardar Cambios</button>
     </div>
   </div>
 

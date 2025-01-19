@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Product } from '../../services/servicio productos/product.interface';
+import { Category, Product } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { ProductoComponent } from "../../estructura/producto/producto.component";
 import { SearchService } from '../../services/servicio search/search.service';
@@ -14,60 +14,40 @@ import { SearchService } from '../../services/servicio search/search.service';
   styleUrls: ['./productos-esctruct.component.css'],
 })
 export class ProductosEsctructComponent implements OnInit {
-  products: Product[] = [];
-  filteredProducts: Product[] = [];
-  searchTerm: string = '';
+  products: Product[] = []; // Todos los productos
+  filteredProducts: Product[] = []; // Productos después de aplicar filtros
+  priceRange = { min: 0, max: Infinity }; // Rango de precios
+  searchTerm: string = ''; // Término de búsqueda
 
-  priceRange: { min: number; max: number } = { min: 0, max: 10000 };
-  selectedCategory: string = '';
+  constructor(private productService: ProductService) {}
 
-  categories: string[] = ['Mieles', 'Pastas', 'Frutos Secos'];
+  ngOnInit(): void {
+    this.loadProducts();
+  }
 
-  constructor(private service: ProductService, private searchService: SearchService) {}
-
-  async ngOnInit(): Promise<void> {
+  // Carga los productos desde la API
+  private async loadProducts(): Promise<void> {
     try {
-      const data: Product[] = await this.service.getProductsList();
-      console.log('Datos recibidos de la API:', data);
-      this.products = data;
-      this.filteredProducts = [...data];
-
-      // Escuchar los cambios en el término de búsqueda
-      this.searchService.searchTerm$.subscribe((term) => {
-        this.searchTerm = term;
-        this.applyFilters();
-      });
+      this.products = await this.productService.getProductsList();
+      this.filteredProducts = [...this.products]; // Inicializa con todos los productos
     } catch (error) {
       console.error('Error al cargar los productos:', error);
     }
   }
 
-  // Filtrar por precio, categoría y búsqueda
+  // Aplica filtros de búsqueda y rango de precios
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) => {
-      const priceMatch = product.price >= this.priceRange.min && product.price <= this.priceRange.max;
+      const matchesPrice =
+        product.price >= (this.priceRange.min || 0) &&
+        product.price <= (this.priceRange.max || Infinity);
 
-      const categoryMatch = this.selectedCategory
-        ? product.categories?.some((cat) => cat.name === this.selectedCategory)
-        : true;
+      const matchesSearch =
+        this.searchTerm.trim() === '' || // Sin término de búsqueda
+        product.name.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(this.searchTerm.toLowerCase());
 
-      const searchMatch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-
-      return priceMatch && categoryMatch && searchMatch;
+      return matchesPrice && matchesSearch;
     });
-  }
-
-  // Resetear filtros
-  resetFilters(): void {
-    this.priceRange = { min: 0, max: 10000 };
-    this.selectedCategory = '';
-    this.searchTerm = '';
-    this.filteredProducts = [...this.products];
-  }
-
-  // Seleccionar categoría
-  selectCategory(category: string): void {
-    this.selectedCategory = category;
-    this.applyFilters();
   }
 }

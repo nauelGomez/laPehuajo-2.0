@@ -1,13 +1,46 @@
 <div class="product-container">
-    <h1>Eliminar Productos</h1>
-    <div *ngIf="filteredProducts.length > 0; else noProducts">
-      <div *ngFor="let product of filteredProducts" class="product-card">
-        <app-producto [productoInfo]="product"></app-producto>
-        <button class="delete-button" (click)="deleteProduct(product.id)">Eliminar</button>
-      </div>
+  <h1>Eliminar Productos</h1>
+
+  <!-- Barra de búsqueda y filtro de precios -->
+  <div class="filters">
+    <div class="filter-search">
+      <input
+        type="text"
+        [(ngModel)]="searchTerm"
+        placeholder="Buscar productos..."
+        (input)="applyFilters()"
+      />
+      <ion-icon name="search-outline"></ion-icon>
     </div>
-    <ng-template #noProducts>
-      <p>No hay productos disponibles.</p>
-    </ng-template>
+
+    <div class="filter-price">
+      <a>PRECIO $:</a>
+      <input
+        type="number"
+        [(ngModel)]="priceRange.min"
+        placeholder="Desde"
+        (change)="applyFilters()"
+      />
+      <span></span>
+      <input
+        type="number"
+        [(ngModel)]="priceRange.max"
+        placeholder="Hasta"
+        (change)="applyFilters()"
+      />
+    </div>
   </div>
-  
+
+  <!-- Lista de productos -->
+  <div *ngIf="filteredProducts.length > 0; else noProducts">
+    <div *ngFor="let product of filteredProducts" class="product-card">
+      <app-producto [productoInfo]="product"></app-producto>
+      <button class="delete-button" (click)="deleteProduct(product.id)">Eliminar</button>
+    </div>
+  </div>
+
+  <!-- Mensaje cuando no hay productos -->
+  <ng-template #noProducts>
+    <p>No hay productos disponibles.</p>
+  </ng-template>
+</div>

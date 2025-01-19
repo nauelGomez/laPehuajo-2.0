@@ -1,21 +1,24 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, CUSTOM_ELEMENTS_SCHEMA, OnInit } from '@angular/core';
 import { Product } from '../../services/servicio productos/product.interface';
 import { ProductService } from '../../services/servicio productos/product.service';
 import { ProductoComponent } from '../../estructura/producto/producto.component';
 import { SearchService } from '../../services/servicio search/search.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-eliminar-producto',
   standalone: true,
-  imports: [CommonModule, ProductoComponent],
+  imports: [CommonModule, ProductoComponent, FormsModule],
   templateUrl: './eliminar-producto.component.html',
   styleUrls: ['./eliminar-producto.component.css'],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class EliminarProductoComponent implements OnInit {
   products: Product[] = [];
   filteredProducts: Product[] = [];
   searchTerm: string = '';
+  priceRange = { min: 0, max: Infinity }; // Rango de precios
 
   constructor(private productService: ProductService, private searchService: SearchService) {}
 
@@ -39,7 +42,10 @@ export class EliminarProductoComponent implements OnInit {
   applyFilters(): void {
     this.filteredProducts = this.products.filter((product) => {
       const searchMatch = product.name.toLowerCase().includes(this.searchTerm.toLowerCase());
-      return searchMatch;
+      const priceMatch =
+        product.price >= (this.priceRange.min || 0) &&
+        product.price <= (this.priceRange.max || Infinity);
+      return searchMatch && priceMatch;
     });
   }
 

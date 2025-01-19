@@ -1,4 +1,79 @@
+.filters {
+  display:flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid #eaeaea;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
 
+.filter-search {
+  position: relative;
+  width: 250px;
+}
+
+.filter-search input {
+  width: 100%;
+  padding: 0.5rem 1rem;
+  padding-left: 2.5rem;
+  font-size: 0.9rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 50px;
+  background-color: #ffffff;
+  color: #333333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+.filter-search input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+.filter-search input::placeholder {
+  color: #aaaaaa;
+}
+
+.filter-search ion-icon {
+  position: absolute;
+  top: 50%;
+  left: 1rem;
+  transform: translateY(-50%);
+  font-size: 1.2rem;
+  color: #aaaaaa;
+  transition: color 0.3s ease;
+}
+
+.filter-price {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.filter-price a {
+  font-weight: bold;
+  color: #333333;
+}
+
+.filter-price input {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #dcdcdc;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  color: #333333;
+  transition: border 0.3s ease, box-shadow 0.3s ease;
+}
+
+.filter-price input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
 
 .product-container {
   font-family: 'Playfair Display', serif;
