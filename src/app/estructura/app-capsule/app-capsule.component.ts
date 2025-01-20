@@ -45,8 +45,8 @@ export class AppCapsuleComponent implements OnInit {
       this.cartTotal = this.carritoService.calculateTotal();
       this.isLoading = false;
     });
-    this.carritoService.getCartItems();
   }
+  
   sendToWhatsApp(): void {
     if (this.cartItems.length === 0) {
       alert('El carrito está vacío. Agrega productos antes de enviar el pedido.');
@@ -66,6 +66,8 @@ export class AppCapsuleComponent implements OnInit {
   
     const whatsappUrl = `https://wa.me/${phoneNumber}?text=${message}`;
     window.open(whatsappUrl, '_blank');
+
+    this.carritoService.clearCart();
   }
   
   toggleCart(): void {
